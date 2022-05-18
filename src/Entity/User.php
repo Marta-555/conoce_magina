@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $surname;
 
-    #[ORM\Column(type: 'string', length: 60)]
+    #[ORM\Column(type: 'string', length: 60, unique: true)]
     private $alias;
 
     #[ORM\Column(type: 'datetime')]
