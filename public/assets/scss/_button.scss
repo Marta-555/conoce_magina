@@ -91,7 +91,8 @@
 
 .btn.btn-border-d:hover,
 .btn.btn-border-d:focus {
-	background: rgba(17, 17, 17, 1);
+	border: none;
+	background: $orange;
 	color: #fff;
 }
 

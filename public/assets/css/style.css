@@ -2,6 +2,9 @@
 /*--------------------------------------------------------------
 	Common
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+	Common
+--------------------------------------------------------------*/
 html {
   overflow-y: scroll;
   overflow-x: hidden;
@@ -10,7 +13,7 @@ html {
 
 body {
   background: #fff;
-  font: 400 12px/1.8 "Open Sans", sans-serif;
+  font: 400 15px/1.8 "Open Sans", sans-serif;
   color: #666;
   -webkit-font-smoothing: antialiased;
 }
@@ -767,7 +770,8 @@ a,
 
 .btn.btn-border-d:hover,
 .btn.btn-border-d:focus {
-  background: rgb(17, 17, 17);
+  border: none;
+  background: #C56824;
   color: #fff;
 }
 
@@ -1324,7 +1328,9 @@ General Styles - Owlcarousel
 .navbar-custom .dropdown-menu > li > a:focus,
 .navbar-custom .dropdown-menu > li > a:hover {
   background: none;
-  color: #fff;
+  color: #b2d07e;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .navbar-custom .dropdown-menu > li > a:hover {

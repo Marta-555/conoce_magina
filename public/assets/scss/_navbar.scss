@@ -83,7 +83,9 @@
 .navbar-custom .dropdown-menu > li > a:focus,
 .navbar-custom .dropdown-menu > li > a:hover {
 	background: none;
-	color: #fff;
+	color: $green;
+	font-weight: bold;
+	font-size: 16px;
 }
 
 .navbar-custom .dropdown-menu > li > a:hover {
