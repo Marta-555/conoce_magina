@@ -6,7 +6,7 @@
 	font-family: "Roboto Condensed", sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 3px;
-	font-size: 11px;
+	font-size: 14px;
 	-webkit-transition: background, padding 0.4s ease-in-out 0s;
 	-moz-transition: background, padding 0.4s ease-in-out 0s;
 	-ms-transition: background, padding 0.4s ease-in-out 0s;
@@ -31,16 +31,26 @@
 	box-shadow: none;
 }
 
-.navbar-custom .navbar-brand {
-	letter-spacing: 4px;
-	font-weight: 400;
-	font-size: 22px;
-	color: #fff;
+// .navbar-custom .navbar-brand {
+// 	letter-spacing: 4px;
+// 	font-weight: 400;
+// 	font-size: 22px;
+// 	color: #fff;
+// }
+
+.navbar-brand {
+	float: left;
+	height: 100px;
+	padding: 0 1% 0 8%;
+}
+
+.navbar-nav {
+	margin: 18px -15px;
 }
 
 .navbar-custom .nav li > a {
 	position: relative;
-	color: rgba(255, 255, 255, .7);
+	color: rgba(255, 255, 255, 0.92);
 }
 
 .navbar-custom .dropdown-menu > li > a {
