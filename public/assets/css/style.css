@@ -175,7 +175,7 @@ a,
 
 /* Module header */
 .module-small {
-  padding: 70px 0;
+  padding: 50px 0;
 }
 
 .module-extra-small {
@@ -311,6 +311,7 @@ a,
 .parallax-bg {
   background-attachment: fixed;
   background-size: cover;
+  margin: 5% 0;
 }
 
 /* Vertical margin, padding */
@@ -688,6 +689,13 @@ a,
   letter-spacing: 2px;
   font-size: 11px;
   padding: 8px 37px;
+  background: rgba(255, 255, 255);
+	color: #111;
+}
+
+.btn:hover {
+	background: #C56824;
+	color: #e5e5e5;
 }
 
 .btn.active.focus,
@@ -742,14 +750,15 @@ a,
   color: #111;
 }
 
-.btn.btn-d {
+.btn-d {
   background: rgba(17, 17, 17, 0.8);
   color: #fff;
 }
 
-.btn.btn-d:hover,
-.btn.btn-d:focus {
-  background: rgb(17, 17, 17);
+.btn-d:hover,
+.btn-d:focus {
+  background: #C56824;
+  color: #e5e5e5;
 }
 
 .btn.btn-b {
@@ -903,7 +912,7 @@ a:hover, a:focus {
 }
 
 .bg-dark a:hover, .bg-dark a:focus {
-  color: #fff;
+  color: #b2d07e;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1324,17 +1333,17 @@ General Styles - Owlcarousel
 .navbar-custom .nav > li > a:hover,
 .navbar-custom .nav .open > a,
 .navbar-custom .nav .open > a:focus,
-.navbar-custom .nav .open > a:hover,
-.navbar-custom .dropdown-menu > li > a:focus,
-.navbar-custom .dropdown-menu > li > a:hover {
+.navbar-custom .nav .open > a:hover {
   background: none;
   color: #b2d07e;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
 }
 
+.navbar-custom .dropdown-menu > li > a:focus,
 .navbar-custom .dropdown-menu > li > a:hover {
   background: rgba(255, 255, 255, 0.1) !important;
+  color: #b2d07e;
 }
 
 .navbar-custom .dropdown-toggle:after {
@@ -1531,13 +1540,27 @@ General Styles - Owlcarousel
 }
 .footer .copyright {
   margin: 0;
+  text-align: center;
+}
+.footer .footer-datos {
+  text-align: right;
+}
+.footer .footer-datos a {
+  display: inline-block;
+  padding: 0 6px;
+}
+.footer .footer-datos a:hover {
+  color: #b2d07e;
 }
 .footer .footer-social-links {
   text-align: right;
 }
-.footer .footer-social-links a {
+.social-links a {
   display: inline-block;
   padding: 0 6px;
+}
+.social-links a:hover {
+  color: #b2d07e;
 }
 
 /* -------------------------------------------------------------
@@ -1835,6 +1858,10 @@ Google map
 /*--------------------------------------------------------------
 	Video Box
 --------------------------------------------------------------*/
+.video {
+	margin: 5% 0 0 0;
+}
+
 .video-box {
   text-align: center;
   padding: 40px 0;
@@ -2369,6 +2396,12 @@ Google map
 .sidebar .widget-title {
   color: #111;
 }
+
+.widget-logo {
+
+	height: 150px;
+}
+
 
 .widget .widget-title {
   border-bottom: 1px dotted #c2c2c2;

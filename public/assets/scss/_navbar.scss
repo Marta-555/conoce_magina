@@ -79,17 +79,17 @@
 .navbar-custom .nav > li > a:hover,
 .navbar-custom .nav .open > a,
 .navbar-custom .nav .open > a:focus,
-.navbar-custom .nav .open > a:hover,
-.navbar-custom .dropdown-menu > li > a:focus,
-.navbar-custom .dropdown-menu > li > a:hover {
+.navbar-custom .nav .open > a:hover {
 	background: none;
 	color: $green;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 15px;
 }
 
+.navbar-custom .dropdown-menu > li > a:focus,
 .navbar-custom .dropdown-menu > li > a:hover {
-	background: rgba(255, 255, 255, .1) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: $green;
 }
 
 .navbar-custom .dropdown-toggle:after {

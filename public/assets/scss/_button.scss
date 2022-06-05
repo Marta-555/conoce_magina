@@ -5,6 +5,13 @@
 	letter-spacing: 2px;
 	font-size: 11px;
 	padding: 8px 37px;
+	background: rgba(255, 255, 255, 0.8);
+	color: #111;
+}
+
+.btn:hover {
+	background: #C56824;
+	color: #e5e5e5;
 }
 
 .btn.active.focus,
@@ -29,7 +36,7 @@
 }
 
 .btn.btn-w {
-	background: rgba(255, 255, 255, .8);
+	background: rgba(255, 255, 255, 0.8);
 	color: #111;
 }
 
@@ -63,14 +70,15 @@
 	color: #111;
 }
 
-.btn.btn-d {
+.btn-d {
 	background: rgba(17, 17, 17, .8);
 	color: #fff;
 }
 
-.btn.btn-d:hover,
-.btn.btn-d:focus {
-	background: rgba(17, 17, 17, 1);
+.btn-d:hover,
+.btn-d:focus {
+	background: #C56824;
+	color: #e5e5e5;
 }
 
 .btn.btn-b {
