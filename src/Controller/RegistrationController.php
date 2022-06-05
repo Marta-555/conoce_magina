@@ -69,12 +69,12 @@ class RegistrationController extends AbstractController
             $mailer = new Mailer($transport);
             $mailer->send($email);
 
-            $this->addFlash('success', 'Usuario registrado correctamente. Verifica tu email para acceder a tu cuenta');
+            $this->addFlash('success', 'Usuario registrado correctamente. Verifica tu email para acceder a tu cuenta.');
 
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 

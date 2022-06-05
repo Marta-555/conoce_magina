@@ -183,8 +183,16 @@ a,
 }
 
 .module-medium {
-  padding: 75px 0px;
+  position: relative;
+  padding: 210px 0;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
 }
+
+/* .module-medium {
+  padding: 75px 0px;
+} */
 
 .holder-w {
   position: relative;
@@ -768,7 +776,8 @@ a,
 
 .btn.btn-b:hover,
 .btn.btn-b:focus {
-  background: rgba(17, 17, 17, 0.8);
+	background: #C56824;
+	color: #e5e5e5;
 }
 
 .btn-border-d {
@@ -913,6 +922,11 @@ a:hover, a:focus {
 
 .bg-dark a:hover, .bg-dark a:focus {
   color: #b2d07e;
+}
+
+.callout-btn-box a:hover, .callout-btn-box a:focus {
+	background: #C56824;
+	color: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1276,7 +1290,7 @@ General Styles - Owlcarousel
   font-family: "Roboto Condensed", sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-size: 14px;
+  font-size: 13px;
   transition: background, padding 0.4s ease-in-out 0s;
 }
 
@@ -1294,7 +1308,7 @@ General Styles - Owlcarousel
 
 .navbar-brand {
   float: left;
-  height: 100px;
+  height: 80px;
   padding: 0 1% 0 8%;
 }
 

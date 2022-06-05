@@ -21,19 +21,8 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('name')
             ->add('surname')
-            ->add('alias')
             ->add('email', EmailType::class)
-            ->add('password', PasswordType::class)
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
-
-        ;
+            ->add('password', PasswordType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

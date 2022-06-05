@@ -35,7 +35,12 @@
             <div class="page-loader">
               <div class="loader">Loading...</div>
             </div>
-            {% include "components/nav.html.twig" %}
+            {% if app.request.get('name') == 'app_home' %}
+                {% include "components/navMain.html.twig" %}
+            {% else %}
+                {% include "components/nav.html.twig" %}
+            {% endif %}
+
             {% block header %}{% endblock %}
         </header>
         <main>

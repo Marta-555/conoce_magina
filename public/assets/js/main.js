@@ -74,7 +74,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Set sections backgrounds
          /* ---------------------------------------------- */
 
-        var module = $('.home-section, .module, .module-small, .side-image');
+        var module = $('.home-section, .module, .module-small, .module-medium, .side-image');
         module.each(function(i) {
             if ($(this).attr('data-background')) {
                 $(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');

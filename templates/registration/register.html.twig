@@ -1,25 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Conoce Mágina{% endblock %}
+
+{% block header %}
+<section class="module-medium bg-dark-30" data-background="assets/images/sierra/sierra_nubes.webp">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <h1 class="module-title font-alt mb-0">Registro</h1>
+        </div>
+      </div>
+    </div>
+</section>
+{% endblock %}
 
 {% block body %}
-    <h1>Registro</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.surname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.password) }}
-        {{ form_row(registrationForm.alias) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-
-    {% for flash in app.flashes('success') %}
-        <div class="alert alert-success">{{ flash }}</div>
-    {% endfor %}
-    {% for flash in app.flashes('error') %}
-        <div class="alert alert-danger">{{ flash }}</div>
-    {% endfor %}
+<section class="module">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <h4 class="font-alt">Únete a nuestra comunidad</h4>
+          <hr class="divider-w mb-10">
+          {{ form_start(form, {'attr': {'role':'form'}}) }}
+            <div class="form-group">
+                {{ form_widget(form.name, {'attr': {'class':'form-control', 'placeholder':'Nombre'} }) }}
+                <span class="text-danger">{{ form_errors(form.name) }}</span>
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.surname, {'attr': {'class':'form-control', 'placeholder':'Apellidos'} }) }}
+                <span class="text-danger">{{ form_errors(form.surname) }}</span>
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.email, {'attr': {'class':'form-control', 'placeholder':'Email'} }) }}
+                <span class="text-danger">{{ form_errors(form.email) }}</span>
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.password, {'attr': {'class':'form-control', 'placeholder':'Contraseña'} }) }}
+                <span class="text-danger">{{ form_errors(form.password) }}</span>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-block btn-round btn-b">Register</button>
+            </div>
+          {{ form_end(form) }}
+          {% for flash in app.flashes('success') %}
+            <div class="alert alert-success">{{ flash }}</div>
+          {% endfor %}
+          {% for flash in app.flashes('error') %}
+            <div class="alert alert-danger">{{ flash }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</section>
 {% endblock %}
