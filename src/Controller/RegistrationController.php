@@ -85,6 +85,8 @@ class RegistrationController extends AbstractController
     #[Route('/verify', name: 'registration_confirmation_route')]
     public function verifyUserEmail(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $user = $userRepository->find($request->query->get('id'));
 
         if (!$user) {
@@ -107,6 +109,8 @@ class RegistrationController extends AbstractController
         $user->setActive('1');
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_login');
+        $this->addFlash('success', 'Tu email ha sido verificado con éxito');
+
+        return $this->redirectToRoute('app_perfil');
     }
 }

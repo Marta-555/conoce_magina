@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Municipio;
-use App\Controller\Admin\UserCrudController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\Admin\MunicipioCrudController;
@@ -24,13 +23,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+#[IsGranted('ROLE_ADMIN')]
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        //return parent::index();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -52,12 +53,12 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Conoce Magina');
+            ->setTitle('Panel de Gestión');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Panel de Gestión', 'fa fa-home');
+        yield MenuItem::linkToRoute('Página principal', 'fa fa-home', 'app_main');
 
         yield MenuItem::linkToCrud('Usuarios', 'fas fa-user', User::class);
 

@@ -17,20 +17,9 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
-          <h4 class="font-alt">Accede a tu perfil</h4>
+          <h4 class="font-alt">Inicia sesión o <a href="{{ path('app_register') }}">regístrate</a></h4>
           <hr class="divider-w mb-10">
           <form class="form"  method="post">
-
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                </div>
-            {% endif %}
-
             <div class="form-group">
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Email" required autofocus>
             </div>
@@ -38,10 +27,24 @@
                 <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Contraseña" required>
             </div>
             <div class="form-group">
+              <input type="checkbox" name="remember_me">Recuérdame
+            </div>
+            <div class="form-group">
               <button type="submit" class="btn btn-block btn-round btn-b">Login</button>
             </div>
             {# <div class="form-group"><a href="">Forgot Password?</a></div> #}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    Ya has iniciado sesión como {{ app.user.email }}, <a href="{{ path('app_logout') }}">Cerrar sesión</a>
+                </div>
+            {% endif %}
+
           </form>
         </div>
     </div>
