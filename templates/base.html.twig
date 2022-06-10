@@ -35,11 +35,11 @@
             <div class="page-loader">
               <div class="loader">Loading...</div>
             </div>
-            {% if app.request.get('name') == 'app_home' %}
+            {# {% if app.request.get('name') == 'app_home' %}
                 {% include "components/navMain.html.twig" %}
-            {% else %}
+            {% else %} #}
                 {% include "components/nav.html.twig" %}
-            {% endif %}
+            {# {% endif %} #}
 
             {% block header %}{% endblock %}
         </header>

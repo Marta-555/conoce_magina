@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% set pueblo = '' %}
+
+{% block header %}
+<section class="module-medium bg-dark-30 portfolio-page-header" data-background="assets/images/pueblos/albanchez/albanchez-magina.webp">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h1 class="module-title font-alt">Los pueblos de Mágina</h1>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block body %}
+<section class="module">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>El pasado árabe de Sierra Mágina como frontera con el reino nazarí de Granada, queda patente en sus pueblos, de casas blancas y calles empinadas que se adaptan al abrupto terreno, en sus castillos roqueros y torres vigías imprescindibles en épocas pasadas y en sus nombres. Alrededor del Parque Natural de Sierra Mágina se encuentran los municipios de <strong>Albanchéz de Mágina</strong>, <strong>Bedmar y Garciéz</strong>, <strong>Belméz de la Moraleda</strong>, <strong>Jimena</strong>, <strong>Jódar</strong>, <strong>Pegalajar</strong>, <strong>Torres</strong>, <strong>Huelma</strong> y <strong>Cambil</strong>.</p>
+            </div>
+        </div>
+        <br>
+        <ul class="works-grid works-grid-3 works-grid-gut works-hover-d" id="works-grid">
+            <li class="work-item">
+                <a href="{{ path('app_albanchez') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/albanchez/Albanchez2.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Albanchez de Mágina</h3>
+                    </div>
+                </a>
+            </li>
+            <li class="work-item">
+                <a href="{{ path('app_bedmar') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/bedmar/bedmar.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Bedmar y Garcíez</h3>
+                    </div>
+                </a>
+            </li>
+            <li class="work-item">
+                <a href="{{ path('app_belmez') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/belmez/belmez.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Bélmez de la Moraleda</h3>
+                    </div>
+                </a>
+            </li>
+            <li class="work-item">
+                <a href="{{ path('app_jimena') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/jimena/jimena.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Jimena</h3>
+                    </div>
+                </a>
+            </li>
+            <li class="work-item">
+                <a href="{{ path('app_jodar') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/jodar/jodar.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Jódar</h3>
+                    </div>
+                </a>
+            </li>
+            <li class="work-item">
+                <a href="{{ path('app_pegalajar') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/pegalajar/pegalajar.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Pegalajar</h3>
+                    </div>
+                </a>
+            </li>
+            <li class="work-item">
+                <a href="{{ path('app_torres') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/torres/torres.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Torres</h3>
+                    </div>
+                </a>
+            </li>
+            <li class="work-item">
+                <a href="{{ path('app_huelma') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/huelma/huelma-castillo.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Huelma</h3>
+                    </div>
+                </a>
+            </li>
+            <li class="work-item">
+                <a href="{{ path('app_cambil') }}">
+                    <div class="work-image"><img src="assets/images/pueblos/cambil/Cambil.webp" alt="Portfolio Item"/></div>
+                    <div class="work-caption font-alt">
+                        <h3 class="work-title">Cambil</h3>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Destacan castillos como el de Solera, en el término municipal de Huelma, desde el que el horizonte parece no tener fin, o el de Albanchéz de Mágina, en difícil equilibrio sobre la roca. También la existencia de múltiples restos de fortificaciones y torres vigías a cada paso, que proliferaron como consecuencia de la reconquista.</p>
+                <p>Son lugares que cuentan con un alto valor histórico y arquitectónico, donde sobresalen joyas renacentistas como la Iglesia de la Inmaculada Concepción de Huelma, en cuya construcción participaron grandes artistas de la época como Andrés de Vandelvira.</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video id="video" autoplay muted controls>
+                        <source src="assets/video/Los 9 secretos de Mágina.mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

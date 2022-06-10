@@ -13,4 +13,19 @@ class MainController extends AbstractController
     {
         return $this->render('main/index.html.twig');
     }
+
+
+    #[Route('/location', name: 'app_location')]
+    public function location(): Response
+    {
+        return $this->render('location/index.html.twig', [
+            'controller_name' => 'LocationController',
+        ]);
+    }
+
+    #[Route('/pueblos', name: 'app_pueblos')]
+    public function pueblos(): Response
+    {
+        return $this->render('pueblos/index.html.twig');
+    }
 }

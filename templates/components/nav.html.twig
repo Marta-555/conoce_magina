@@ -9,7 +9,7 @@
         <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Descubre Mágina</a>
           <ul class="dropdown-menu">
             <li><a href="">El Parque Natural</a></li>
-            <li><a href="">Sus pueblos</a></li>
+            <li><a href="{{ path('app_pueblos') }}">Sus pueblos</a></li>
             <li><a href="{{ path('app_location') }}">Localización</a></li>
           </ul>
         </li>
@@ -44,7 +44,6 @@
             </ul>
           </li>
         {% else %}
-          {# <li><a href="{{ app.user ? 'logout' : 'login'}}">{{ app.user ? 'Logout' : 'Login'}}</a></li> #}
           <li><a href="{{ path('app_login') }}">Login</a></li>
         {% endif %}
       </ul>
