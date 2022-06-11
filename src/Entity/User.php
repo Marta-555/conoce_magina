@@ -170,4 +170,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return in_array(self::ROLE_ADMIN, $this->getRoles());
     }
 
+    public function __toString()
+    {
+        return $this->email;
+    }
+
 }

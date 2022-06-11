@@ -75,6 +75,18 @@ class ActividadOcio
         return $this->image;
     }
 
+    public function getImageUrl(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+        if (strpos($this->image, '/') !== false) {
+            return $this->image;
+        }
+
+        return sprintf('images/uploads-actOcio/%s', $this->image);
+    }
+
     public function setImage(?string $image): self
     {
         $this->image = $image;
@@ -92,5 +104,10 @@ class ActividadOcio
         $this->empresa = $empresa;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nombre;
     }
 }

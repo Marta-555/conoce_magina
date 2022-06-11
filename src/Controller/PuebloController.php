@@ -14,7 +14,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Albanchez de Mágina',
-            'asset'=> 'assets/images/pueblos/albanchez/Albanchez2.webp'
+            'asset'=> 'assets/images/pueblos/albanchez/pueblo-albanchez.webp'
         ]);
     }
 
@@ -23,7 +23,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Bedmar y Garcíez',
-            'asset'=> 'assets/images/pueblos/bedmar/bedmar.webp'
+            'asset'=> 'assets/images/pueblos/bedmar/pueblo-bedmar.webp'
         ]);
     }
 
@@ -32,7 +32,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Bélmez de la Moraleda',
-            'asset'=> 'assets/images/pueblos/belmez/belmez.webp'
+            'asset'=> 'assets/images/pueblos/belmez/pueblo-belmez.webp'
         ]);
     }
 
@@ -41,7 +41,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Jimena',
-            'asset'=> 'assets/images/pueblos/jimena/jimena.webp'
+            'asset'=> 'assets/images/pueblos/jimena/pueblo-jimena.webp'
         ]);
     }
 
@@ -50,7 +50,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Jódar',
-            'asset'=> 'assets/images/pueblos/jodar/jodar.webp'
+            'asset'=> 'assets/images/pueblos/jodar/pueblo-jodar.webp'
         ]);
     }
 
@@ -59,7 +59,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Pegalajar',
-            'asset'=> 'assets/images/pueblos/pegalajar/pegalajar.webp'
+            'asset'=> 'assets/images/pueblos/pegalajar/pueblo-pegalajar.webp'
         ]);
     }
 
@@ -68,7 +68,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Torres',
-            'asset'=> 'assets/images/pueblos/torres/torres.webp'
+            'asset'=> 'assets/images/pueblos/torres/pueblo-torres.webp'
         ]);
     }
 
@@ -77,7 +77,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Huelma',
-            'asset'=> 'assets/images/pueblos/huelma/huelma-castillo.webp'
+            'asset'=> 'assets/images/pueblos/huelma/pueblo-huelma.webp'
         ]);
     }
 
@@ -86,7 +86,7 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Cambil',
-            'asset'=> 'assets/images/pueblos/cambil/Cambil.webp'
+            'asset'=> 'assets/images/pueblos/cambil/pueblo-cambil.webp'
         ]);
     }
 

@@ -19,18 +19,15 @@ class Municipio
     private $nombre;
 
     #[ORM\Column(type: 'integer')]
-    private $codigo_postal;
-
-    #[ORM\Column(type: 'integer')]
     private $altitud;
 
     #[ORM\Column(type: 'float')]
     private $superficie;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'float')]
     private $latitud;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'float')]
     private $longitud;
 
     #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: Poblacion::class, orphanRemoval: true)]
@@ -54,18 +51,6 @@ class Municipio
     public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    public function getCodigoPostal(): ?int
-    {
-        return $this->codigo_postal;
-    }
-
-    public function setCodigoPostal(int $codigo_postal): self
-    {
-        $this->codigo_postal = $codigo_postal;
 
         return $this;
     }
@@ -94,24 +79,24 @@ class Municipio
         return $this;
     }
 
-    public function getLatitud(): ?int
+    public function getLatitud(): ?float
     {
         return $this->latitud;
     }
 
-    public function setLatitud(int $latitud): self
+    public function setLatitud(float $latitud): self
     {
         $this->latitud = $latitud;
 
         return $this;
     }
 
-    public function getLongitud(): ?int
+    public function getLongitud(): ?float
     {
         return $this->longitud;
     }
 
-    public function setLongitud(int $longitud): self
+    public function setLongitud(float $longitud): self
     {
         $this->longitud = $longitud;
 
@@ -146,5 +131,10 @@ class Municipio
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nombre;
     }
 }

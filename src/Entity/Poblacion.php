@@ -19,6 +19,9 @@ class Poblacion
     private $nombre;
 
     #[ORM\Column(type: 'integer')]
+    private $codigo_postal;
+
+    #[ORM\Column(type: 'integer')]
     private $habitantes;
 
     #[ORM\ManyToOne(targetEntity: Municipio::class, inversedBy: 'poblaciones')]
@@ -58,6 +61,18 @@ class Poblacion
     public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getCodigoPostal(): ?int
+    {
+        return $this->codigo_postal;
+    }
+
+    public function setCodigoPostal(int $codigo_postal): self
+    {
+        $this->codigo_postal = $codigo_postal;
 
         return $this;
     }
@@ -204,5 +219,10 @@ class Poblacion
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nombre;
     }
 }

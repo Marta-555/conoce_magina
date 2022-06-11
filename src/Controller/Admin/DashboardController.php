@@ -64,7 +64,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::subMenu('Núcleos de población', 'fas fa-city')->setSubItems([
             MenuItem::linkToCrud('Municipios', 'fas fa-map-marker', Municipio::class),
-            MenuItem::linkToCrud('Localidades', 'fas fa-map-marker', Poblacion::class)
+            MenuItem::linkToCrud('Población', 'fas fa-map-marker', Poblacion::class)
         ]);
 
         yield MenuItem::subMenu('Categorías', 'fas fa-bars')->setSubItems([

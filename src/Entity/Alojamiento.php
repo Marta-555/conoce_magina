@@ -20,7 +20,10 @@ class Alojamiento
     private $direccion;
 
     #[ORM\Column(type: 'integer')]
-    private $telefono;
+    private $telefono_1;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $telefono_2;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $pagina_web;
@@ -65,14 +68,26 @@ class Alojamiento
         return $this;
     }
 
-    public function getTelefono(): ?int
+    public function getTelefono1(): ?int
     {
-        return $this->telefono;
+        return $this->telefono_1;
     }
 
-    public function setTelefono(int $telefono): self
+    public function setTelefono1(int $telefono_1): self
     {
-        $this->telefono = $telefono;
+        $this->telefono_1 = $telefono_1;
+
+        return $this;
+    }
+
+    public function getTelefono2(): ?int
+    {
+        return $this->telefono_2;
+    }
+
+    public function setTelefono2(int $telefono_2): self
+    {
+        $this->telefono_2 = $telefono_2;
 
         return $this;
     }
@@ -92,6 +107,18 @@ class Alojamiento
     public function getImage(): ?string
     {
         return $this->image;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+        if (strpos($this->image, '/') !== false) {
+            return $this->image;
+        }
+
+        return sprintf('images/uploads-alojamiento/%s', $this->image);
     }
 
     public function setImage(?string $image): self
@@ -123,5 +150,10 @@ class Alojamiento
         $this->poblacion = $poblacion;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nombre;
     }
 }

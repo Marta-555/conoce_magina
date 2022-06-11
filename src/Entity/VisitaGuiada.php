@@ -75,6 +75,19 @@ class VisitaGuiada
         return $this->image;
     }
 
+    public function getImageUrl(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+        if (strpos($this->image, '/') !== false) {
+            return $this->image;
+        }
+
+        return sprintf('images/uploads-vGuiada/%s', $this->image);
+    }
+
+
     public function setImage(?string $image): self
     {
         $this->image = $image;
@@ -92,5 +105,10 @@ class VisitaGuiada
         $this->empresa = $empresa;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nombre;
     }
 }
