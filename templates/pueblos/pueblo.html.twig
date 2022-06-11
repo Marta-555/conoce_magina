@@ -14,92 +14,155 @@
 
 {% block body %}
 <section class="module">
-    <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 js-item">
+        <ul class="filter font-alt" id="filters">
+          <li><a class="current wow fadeInUp" href="#" data-filter="*">Todo</a></li>
+          <li><a class="wow fadeInUp" href="#" data-filter=".historia" data-wow-delay="0.2s">Historia</a></li>
+          <li><a class="wow fadeInUp" href="#" data-filter=".restaurante" data-wow-delay="0.2s">Comer y beber</a></li>
+          <li><a class="wow fadeInUp" href="#" data-filter=".alojamiento" data-wow-delay="0.4s">Alojamiento</a></li>
+          <li><a class="wow fadeInUp" href="#" data-filter=".tActivo" data-wow-delay="0.6s">Turismo Activo</a></li>
+          <li><a class="wow fadeInUp" href="#" data-filter=".vGuiadas" data-wow-delay="0.6s">Visitas Guiadas</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row works-grid-gut works-grid" id="works-grid">
       <div class="row">
-        <div class="col-sm-12">
-          <div class="post-images-slider">
-            <ul class="slides">
-              <li><img class="center-block" src="assets/images/work-1.jpg" alt="Slider Image"/></li>
-              <li><img class="center-block" src="assets/images/work-2.jpg" alt="Slider Image"/></li>
-              <li><img class="center-block" src="assets/images/work-4.jpg" alt="Slider Image"/></li>
-            </ul>
-          </div>
+        <div class="work-item historia">
+          <h3 class="alt-features-title font-alt">Historia</h3>
+          <p>Aquí va la historia del pueblo</p>
         </div>
       </div>
-      <div class="row multi-columns-row">
-        <div class="col-sm-6 col-md-4 col-lg-4">
-          <div class="alt-features-item">
-            <div class="alt-features-icon"><span class="icon-tools-2"></span></div>
-            <h3 class="alt-features-title font-alt">Development</h3>A wonderful serenity has taken possession of my entire soul like these sweet mornings.
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-4">
-          <div class="alt-features-item">
-            <div class="alt-features-icon"><span class="icon-tools"></span></div>
-            <h3 class="alt-features-title font-alt">Design</h3>A wonderful serenity has taken possession of my entire soul like these sweet mornings.
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-4">
-          <div class="alt-features-item">
-            <div class="alt-features-icon"><span class="icon-camera"></span></div>
-            <h3 class="alt-features-title font-alt">Photography</h3>A wonderful serenity has taken possession of my entire soul like these sweet mornings.
-          </div>
+      <div class="row">
+        <div class="work-item restaurante">
+          <h3 class="alt-features-title font-alt">Comer y beber</h3>
+          <p class="js-restaurant">Aqui van los restaurantes</p>
         </div>
       </div>
-      <hr class="divider-w mt-60 mb-60">
-      <div class="row multi-columns-row">
-        <div class="col-sm-6 col-md-4 col-lg-4">
-          <div class="work-details">
-            <h5 class="work-details-title font-alt">Project Details</h5>
-            <p></p>
-            <ul>
-              <li><strong>Client: </strong><span class="font-serif"><a href="#" target="_blank">SomeCompany</a></span>
-              </li>
-              <li><strong>Date: </strong><span class="font-serif"><a href="#" target="_blank">23 November, 2015</a></span>
-              </li>
-              <li><strong>Online: </strong><span class="font-serif"><a href="#" target="_blank">www.example.com</a></span>
-              </li>
-            </ul>
-          </div>
+      <div class="row">
+        <div class="work-item alojamiento">
+          <h3 class="alt-features-title font-alt">Alojamientos</h3>
+          <p class="js-alojamiento">Aqui van los alojamientos</p>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-4">
-          <p>The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.</p>
-          <p>Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
+      </div>
+      <div class="row">
+        <div class="work-item tActivo">
+          <h3 class="alt-features-title font-alt">Turismo Activo</h3>
+          <p class="js-tActivo">Aqui van las actividades turismo activo</p>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-4">
-          <p>The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.</p>
+      </div>
+      <div class="row">
+        <div class="work-item vGuiadas">
+          <h3 class="alt-features-title font-alt">Visitas Guiadas</h3>
+          <p class="js-vGuiadas">Aqui van las visitas guiadas</p>
         </div>
       </div>
     </div>
-  </section>
-  <hr class="divider-w">
-  <section class="module">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-          <h2 class="module-title font-alt">Related Projects</h2>
+  </div>
+</section>
+<hr class="divider-w mt-60 mb-60">
+<section class="module sliding-portfolio">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <h2 class="module-title">Galería de imágenes</h2>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row multi-columns-row">
+      <div class="owl-carousel" data-items="3" data-pagination="false" data-navigation="false">
+        <div class="owl-item">
+          <div class="col-sm-16 col-md-12 col-lg-12">
+            <div class="gallery-item">
+                <div class="gallery-image">
+                  <a href="{{ galeria.imagen1 }}" title="{{ galeria.titulo1 }}">
+                    <img src="{{ galeria.imagen1 }}" alt="{{ galeria.titulo1 }}"/>
+                    <div class="gallery-caption">
+                      <div class="gallery-icon"><span class="icon-magnifying-glass"></span></div>
+                    </div>
+                  </a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="owl-item">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="gallery-item">
+                <div class="gallery-image">
+                  <a href="{{ galeria.imagen2 }}" title="{{ galeria.titulo2 }}">
+                    <img src="{{ galeria.imagen2 }}" alt="{{ galeria.titulo2 }}"/>
+                    <div class="gallery-caption">
+                      <div class="gallery-icon"><span class="icon-magnifying-glass"></span></div>
+                    </div>
+                  </a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="owl-item">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="gallery-item">
+                <div class="gallery-image">
+                  <a href="{{ galeria.imagen3 }}" title="{{ galeria.titulo3 }}">
+                    <img src="{{ galeria.imagen3 }}" alt="{{ galeria.titulo3 }}"/>
+                    <div class="gallery-caption">
+                      <div class="gallery-icon"><span class="icon-magnifying-glass"></span></div>
+                    </div>
+                  </a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="owl-item">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="gallery-item">
+                <div class="gallery-image">
+                  <a href="{{ galeria.imagen4 }}" title="{{ galeria.titulo4 }}">
+                    <img  src="{{ galeria.imagen4 }}" alt="{{ galeria.titulo4 }}"/>
+                    <div class="gallery-caption">
+                      <div class="gallery-icon"><span class="icon-magnifying-glass"></span></div>
+                    </div>
+                  </a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="owl-item">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="gallery-item">
+                <div class="gallery-image">
+                  <a href="{{ galeria.imagen5 }}" title="{{ galeria.titulo5 }}">
+                    <img src="{{ galeria.imagen5 }}" alt="{{ galeria.titulo5 }}"/>
+                    <div class="gallery-caption">
+                      <div class="gallery-icon"><span class="icon-magnifying-glass"></span></div>
+                    </div>
+                  </a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="owl-item">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="gallery-item">
+                <div class="gallery-image">
+                  <a href="{{ galeria.imagen6 }}" title="{{ galeria.titulo6 }}">
+                    <img src="{{ galeria.imagen6 }}" alt="{{ galeria.titulo6 }}"/>
+                    <div class="gallery-caption">
+                      <div class="gallery-icon"><span class="icon-magnifying-glass"></span></div>
+                    </div>
+                  </a>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
-      <ul class="works-grid works-grid-gut works-grid-3 works-hover-w" id="works-grid">
-        <li class="work-item illustration webdesign"><a href="portfolio_single_featured_slider2.html">
-            <div class="work-image"><img src="assets/images/portfolio/grid-portfolio1.jpg" alt="Portfolio Item"/></div>
-            <div class="work-caption font-alt">
-              <h3 class="work-title">Corporate Identity</h3>
-              <div class="work-descr">Illustration</div>
-            </div></a></li>
-        <li class="work-item marketing webdesign"><a href="portfolio_single_featured_video1.html">
-            <div class="work-image"><img src="assets/images/portfolio/grid-portfolio6.jpg" alt="Portfolio Item"/></div>
-            <div class="work-caption font-alt">
-              <h3 class="work-title">Paper clip</h3>
-              <div class="work-descr">Marketing</div>
-            </div></a></li>
-        <li class="work-item illustration webdesign"><a href="portfolio_single_featured_image2.html">
-            <div class="work-image"><img src="assets/images/portfolio/grid-portfolio8.jpg" alt="Portfolio Item"/></div>
-            <div class="work-caption font-alt">
-              <h3 class="work-title">Branding</h3>
-              <div class="work-descr">Illustration</div>
-            </div></a></li>
-      </ul>
     </div>
-  </section>
+  </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <script src="assets/js/town-info.js"></script>
 {% endblock %}

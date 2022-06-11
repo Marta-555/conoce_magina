@@ -14,7 +14,21 @@ class PuebloController extends AbstractController
     {
         return $this->render('pueblos/pueblo.html.twig', [
             'pueblo' => 'Albanchez de Mágina',
-            'asset'=> 'assets/images/pueblos/albanchez/pueblo-albanchez.webp'
+            'asset'=> 'assets/images/pueblos/albanchez/pueblo-albanchez.webp',
+            'galeria' => [
+                'titulo1' => 'Castillo de Albanchez de mágina',
+                'imagen1' => 'assets/images/pueblos/albanchez/castillo2.webp',
+                'titulo2' => 'Calle de Albanchez de Mágina',
+                'imagen2' => 'assets/images/pueblos/albanchez/escaleras.webp',
+                'titulo3' => 'Vistas desde el castillo de Albanchez',
+                'imagen3' => 'assets/images/pueblos/albanchez/castillo.webp',
+                'titulo4' => 'Albanchez de Mágina',
+                'imagen4' => 'assets/images/pueblos/albanchez/pueblo.webp',
+                'titulo5' => 'Paraje de Hútar',
+                'imagen5' => 'assets/images/pueblos/albanchez/hutar4.webp',
+                'titulo6' => 'Paraje de Hútar',
+                'imagen6' => 'assets/images/pueblos/albanchez/hutar2.webp',
+            ]
         ]);
     }
 

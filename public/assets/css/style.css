@@ -1931,7 +1931,7 @@ Google map
 }
 
 .work-item {
-  width: 50%;
+  width: 100%;
   float: left;
   margin: 0;
 }
@@ -2810,7 +2810,7 @@ Google map
 .container .works-grid-3 .work-item,
 .works-grid-4 .work-item,
 .works-grid-5 .work-item {
-    width: 50%;
+    width: 100%;
   }
 
   /* Half-image */
