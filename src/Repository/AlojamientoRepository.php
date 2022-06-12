@@ -47,6 +47,17 @@ class AlojamientoRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findAlojamiento($id)
+    {
+        return $this->createQueryBuilder('a')
+        ->where('a.municipio = :val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Alojamiento[] Returns an array of Alojamiento objects
     //  */

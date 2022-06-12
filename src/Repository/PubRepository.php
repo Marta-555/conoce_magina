@@ -47,6 +47,17 @@ class PubRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findPub($id)
+    {
+        return $this->createQueryBuilder('p')
+        ->where('p.municipio = :val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Pub[] Returns an array of Pub objects
     //  */

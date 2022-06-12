@@ -47,6 +47,16 @@ class VisitaGuiadaRepository extends ServiceEntityRepository
         }
     }
 
+    public function findVisitaG($id)
+    {
+        return $this->createQueryBuilder('v')
+        ->where('v.municipio = :val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     // /**
     //  * @return VisitaGuiada[] Returns an array of VisitaGuiada objects
     //  */

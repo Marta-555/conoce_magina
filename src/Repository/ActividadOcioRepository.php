@@ -47,6 +47,16 @@ class ActividadOcioRepository extends ServiceEntityRepository
         }
     }
 
+    public function findActOcio($id)
+    {
+        return $this->createQueryBuilder('o')
+        ->where('o.municipio = :val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     // /**
     //  * @return ActividadOcio[] Returns an array of ActividadOcio objects
     //  */

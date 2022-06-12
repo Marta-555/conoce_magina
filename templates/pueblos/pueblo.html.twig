@@ -5,7 +5,7 @@
   <div class="container">
       <div class="row">
           <div class="col-sm-6 col-sm-offset-3">
-              <h1 class="module-title font-alt">{{ pueblo }}</h1>
+              <h1 class="module-title font-alt">{{ municipio.nombre }}</h1>
           </div>
       </div>
   </div>
@@ -16,7 +16,7 @@
 <section class="module">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12 js-item">
+      <div class="col-sm-12">
         <ul class="filter font-alt" id="filters">
           <li><a class="current wow fadeInUp" href="#" data-filter="*">Todo</a></li>
           <li><a class="wow fadeInUp" href="#" data-filter=".historia" data-wow-delay="0.2s">Historia</a></li>
@@ -31,31 +31,151 @@
       <div class="row">
         <div class="work-item historia">
           <h3 class="alt-features-title font-alt">Historia</h3>
-          <p>Aquí va la historia del pueblo</p>
+          <p class="datosMunicipio">
+            <span>Población: {{ municipio.habitantes }}</span>
+            <span>Altitud: {{ municipio.altitud }}m</span>
+            <span>Superficie: {{ municipio.superficie }}km2</span>
+            <span>Coordenadas: {{ municipio.latitud }}º {{ municipio.longitud }}º</span>
+          </p>
+
+          {% set value = municipio.nombre %}
+          {% switch value %}
+            {% case 'datos/Albanchez de Mágina' %}
+              {% include 'albanchez.html.twig' %}
+            {% case 'Bedmar y Garcíez' %}
+              {% include 'datos/bedmar.html.twig' %}
+            {% case 'Bélmez de la Moraleda' %}
+              {% include 'datos/belmez.html.twig' %}
+            {% case 'Jimena' %}
+              {% include 'datos/jimena.html.twig' %}
+            {% case 'Jódar' %}
+              {% include 'datos/jodar.html.twig' %}
+            {% case 'Pegalajar' %}
+              {% include 'datos/pegalajar.html.twig' %}
+            {% case 'Torres' %}
+              {% include 'datos/torres.html.twig' %}
+            {% case 'Huelma' %}
+              {% include 'datos/huelma.html.twig' %}
+            {% case 'Cambil' %}
+              {% include 'datos/cambil.html.twig' %}
+          {% endswitch %}
         </div>
       </div>
       <div class="row">
         <div class="work-item restaurante">
           <h3 class="alt-features-title font-alt">Comer y beber</h3>
-          <p class="js-restaurant">Aqui van los restaurantes</p>
+          <div>
+            {% if restaurante is not empty %}
+              {% for rest in restaurante %}
+                <p>
+                  <strong><span>{{rest.nombre}}</span></strong><br>
+                  Dirección: <span>{{rest.direccion}}</span><br>
+                  Tfno: <a href="tel:+34{{rest.telefono1}}">{{rest.telefono1}}</a>
+                    {% if rest.telefono2 is not null %}
+                      <a href="tel:+34{{rest.telefono2}}">/ {{rest.telefono2}}</a>
+                    {% endif %}
+                  <br>
+                  {% if rest.paginaWeb is not null %}
+                    Web: <a href="{{rest.paginaWeb}}" target="_blank">{{rest.paginaWeb}}</a>
+                  {% endif %}
+                <p>
+              {% endfor %}
+            {% else %}
+              <p>No existen restaurantes en este municipio</p>
+            {% endif %}
+
+            {% if pub is not empty %}
+              {% for p in pub %}
+                <p>
+                  <strong><span>{{p.nombre}}</span></strong><br>
+                  Dirección: <span>{{p.direccion}}</span><br>
+                  Tfno: <a href="tel:+34{{p.telefono1}}">{{p.telefono1}}</a>
+                    {% if p.telefono2 is not null %}
+                      <a href="tel:+34{{p.telefono2}}">/ {{p.telefono2}}</a>
+                    {% endif %}
+                  <br>
+                  {% if p.paginaWeb is not null %}
+                    Web: <a href="{{p.paginaWeb}}" target="_blank">{{p.paginaWeb}}</a>
+                  {% endif %}
+                <p>
+              {% endfor %}
+            {% endif %}
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="work-item alojamiento">
           <h3 class="alt-features-title font-alt">Alojamientos</h3>
-          <p class="js-alojamiento">Aqui van los alojamientos</p>
+          <div>
+            {% if alojamiento is not empty %}
+              {% for aloj in alojamiento %}
+                <p>
+                  <strong><span>{{aloj.nombre}}</span></strong><br>
+                  Dirección: <span>{{aloj.direccion}}</span><br>
+                  Tfno: <a href="tel:+34{{aloj.telefono1}}">{{aloj.telefono1}}</a>
+                    {% if aloj.telefono2 is not null %}
+                      <a href="tel:+34{{aloj.telefono2}}">/ {{aloj.telefono2}}</a>
+                    {% endif %}
+                  <br>
+                  {% if aloj.paginaWeb is not null %}
+                    Web: <a href="{{aloj.paginaWeb}}" target="_blank">{{aloj.paginaWeb}}</a>
+                  {% endif %}
+                <p>
+              {% endfor %}
+            {% else %}
+              <p>No existen alojamientos en este municipio</p>
+            {% endif %}
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="work-item tActivo">
           <h3 class="alt-features-title font-alt">Turismo Activo</h3>
-          <p class="js-tActivo">Aqui van las actividades turismo activo</p>
+          <div>
+            {% if ocio is not empty %}
+              {% for oc in ocio %}
+                <p>
+                  <strong><span>{{oc.nombre}}</span></strong><br>
+                  Dirección: <span>{{oc.direccion}}</span><br>
+                  Tfno: <a href="tel:+34{{oc.telefono1}}">{{oc.telefono1}}</a>
+                    {% if oc.telefono2 is not null %}
+                      <a href="tel:+34{{oc.telefono2}}">/ {{oc.telefono2}}</a>
+                    {% endif %}
+                  <br>
+                  {% if oc.paginaWeb is not null %}
+                    Web: <a href="{{oc.paginaWeb}}" target="_blank">{{oc.paginaWeb}}</a>
+                  {% endif %}
+                <p>
+              {% endfor %}
+            {% else %}
+                  <p>No existen actividades en este municipio</p>
+            {% endif %}
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="work-item vGuiadas">
           <h3 class="alt-features-title font-alt">Visitas Guiadas</h3>
-          <p class="js-vGuiadas">Aqui van las visitas guiadas</p>
+          <div>
+            {% if visitaG is not empty %}
+              {% for visit in visitaG %}
+                <p>
+                  <strong><span>{{visit.nombre}}</span></strong><br>
+                  Dirección: <span>{{visit.direccion}}</span><br>
+                  Tfno: <a href="tel:+34{{visit.telefono1}}">{{visit.telefono1}}</a>
+                    {% if visit.telefono2 is not null %}
+                      <a href="tel:+34{{visit.telefono2}}">/ {{visit.telefono2}}</a>
+                    {% endif %}
+                  <br>
+                  {% if visit.paginaWeb is not null %}
+                    Web: <a href="{{visit.paginaWeb}}" target="_blank">{{visit.paginaWeb}}</a>
+                  {% endif %}
+                <p>
+              {% endfor %}
+            {% else %}
+                  <p>No existen visitas en este municipio</p>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
@@ -163,6 +283,7 @@
 
 {% block javascripts %}
   {{ parent() }}
-
-  <script src="assets/js/town-info.js"></script>
+  <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+  <script src="{{ asset('js/ajax-call.js') }}"></script>
 {% endblock %}

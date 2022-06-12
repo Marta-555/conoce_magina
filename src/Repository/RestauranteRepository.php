@@ -47,6 +47,16 @@ class RestauranteRepository extends ServiceEntityRepository
         }
     }
 
+    public function finRestaurante($id)
+    {
+        return $this->createQueryBuilder('r')
+        ->where('r.municipio = :val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Restaurante[] Returns an array of Restaurante objects
     //  */
