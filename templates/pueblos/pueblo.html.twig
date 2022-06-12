@@ -30,35 +30,34 @@
     <div class="row works-grid-gut works-grid" id="works-grid">
       <div class="row">
         <div class="work-item historia">
-          <h3 class="alt-features-title font-alt">Historia</h3>
-          <p class="datosMunicipio">
-            <span>Población: {{ municipio.habitantes }}</span>
-            <span>Altitud: {{ municipio.altitud }}m</span>
-            <span>Superficie: {{ municipio.superficie }}km2</span>
-            <span>Coordenadas: {{ municipio.latitud }}º {{ municipio.longitud }}º</span>
+          <p class="text-right">
+            <span><strong>Altitud:</strong> {{ municipio.altitud }}m</span>&nbsp;
+            <span><strong>Superficie:</strong> {{ municipio.superficie }}km2</span>&nbsp;
+            <span><strong>Coordenadas:</strong> {{ municipio.latitud }}, {{ municipio.longitud }}º</span>
           </p>
 
-          {% set value = municipio.nombre %}
-          {% switch value %}
-            {% case 'datos/Albanchez de Mágina' %}
-              {% include 'albanchez.html.twig' %}
-            {% case 'Bedmar y Garcíez' %}
-              {% include 'datos/bedmar.html.twig' %}
-            {% case 'Bélmez de la Moraleda' %}
-              {% include 'datos/belmez.html.twig' %}
-            {% case 'Jimena' %}
-              {% include 'datos/jimena.html.twig' %}
-            {% case 'Jódar' %}
-              {% include 'datos/jodar.html.twig' %}
-            {% case 'Pegalajar' %}
-              {% include 'datos/pegalajar.html.twig' %}
-            {% case 'Torres' %}
-              {% include 'datos/torres.html.twig' %}
-            {% case 'Huelma' %}
-              {% include 'datos/huelma.html.twig' %}
-            {% case 'Cambil' %}
-              {% include 'datos/cambil.html.twig' %}
-          {% endswitch %}
+          {% if municipio.nombre == 'Albanchez de Mágina' %}
+              {% include 'pueblos/datos/albanchez.html.twig' %}
+          {% elseif municipio.nombre == 'Bedmar y Garcíez' %}
+              {% include 'pueblos/datos/bedmar.html.twig' %}
+          {% elseif municipio.nombre == 'Bélmez de la Moraleda' %}
+              {% include 'pueblos/datos/belmez.html.twig' %}
+          {% elseif municipio.nombre == 'Jimena' %}
+              {% include 'pueblos/datos/jimena.html.twig' %}
+          {% elseif municipio.nombre == 'Jódar' %}
+              {% include 'pueblos/datos/jodar.html.twig' %}
+          {% elseif municipio.nombre == 'Pegalajar' %}
+              {% include 'pueblos/datos/pegalajar.html.twig' %}
+          {% elseif municipio.nombre == 'Torres' %}
+              {% include 'pueblos/datos/torres.html.twig' %}
+          {% elseif municipio.nombre == 'Huelma' %}
+              {% include 'pueblos/datos/huelma.html.twig' %}
+          {% elseif municipio.nombre == 'Cambil' %}
+              {% include 'pueblos/datos/cambil.html.twig' %}
+          {% else %}
+              Error en el envio de datos desde el servidor.
+          {% endif %}
+
         </div>
       </div>
       <div class="row">
@@ -78,7 +77,7 @@
                   {% if rest.paginaWeb is not null %}
                     Web: <a href="{{rest.paginaWeb}}" target="_blank">{{rest.paginaWeb}}</a>
                   {% endif %}
-                <p>
+                </p>
               {% endfor %}
             {% else %}
               <p>No existen restaurantes en este municipio</p>
@@ -97,7 +96,7 @@
                   {% if p.paginaWeb is not null %}
                     Web: <a href="{{p.paginaWeb}}" target="_blank">{{p.paginaWeb}}</a>
                   {% endif %}
-                <p>
+                </p>
               {% endfor %}
             {% endif %}
           </div>
@@ -120,7 +119,7 @@
                   {% if aloj.paginaWeb is not null %}
                     Web: <a href="{{aloj.paginaWeb}}" target="_blank">{{aloj.paginaWeb}}</a>
                   {% endif %}
-                <p>
+                </p>
               {% endfor %}
             {% else %}
               <p>No existen alojamientos en este municipio</p>
@@ -145,7 +144,7 @@
                   {% if oc.paginaWeb is not null %}
                     Web: <a href="{{oc.paginaWeb}}" target="_blank">{{oc.paginaWeb}}</a>
                   {% endif %}
-                <p>
+                </p>
               {% endfor %}
             {% else %}
                   <p>No existen actividades en este municipio</p>
@@ -170,7 +169,7 @@
                   {% if visit.paginaWeb is not null %}
                     Web: <a href="{{visit.paginaWeb}}" target="_blank">{{visit.paginaWeb}}</a>
                   {% endif %}
-                <p>
+                </p>
               {% endfor %}
             {% else %}
                   <p>No existen visitas en este municipio</p>
