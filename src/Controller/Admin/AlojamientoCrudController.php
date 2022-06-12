@@ -31,7 +31,7 @@ class AlojamientoCrudController extends AbstractCrudController
                 ->setUploadDir('public/images/uploads-alojamiento')
                 ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]'),
             AssociationField::new('categoria', 'Servicio'),
-            AssociationField::new('poblacion', 'Población')
+            AssociationField::new('municipio', 'Municipio')
         ];
     }
 

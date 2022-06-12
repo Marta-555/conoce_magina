@@ -21,6 +21,7 @@ class MunicipioCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nombre', 'Nombre'),
+            NumberField::new('habitantes', 'Habitantes'),
             NumberField::new('altitud', 'Altitud (msnm)'),
             NumberField::new('superficie', 'Superficie (km²)'),
             NumberField::new('latitud', 'Latitud'),

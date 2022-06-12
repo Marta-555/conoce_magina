@@ -11,7 +11,6 @@ use App\Entity\ActividadOcio;
 use App\Entity\Alojamiento;
 use App\Entity\Categoria;
 use App\Entity\EmpresaTurismo;
-use App\Entity\Poblacion;
 use App\Entity\Pub;
 use App\Entity\PuntoInteres;
 use App\Entity\Restaurante;
@@ -62,10 +61,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::linkToCrud('Usuarios', 'fas fa-user', User::class);
 
-        yield MenuItem::subMenu('Núcleos de población', 'fas fa-city')->setSubItems([
-            MenuItem::linkToCrud('Municipios', 'fas fa-map-marker', Municipio::class),
-            MenuItem::linkToCrud('Población', 'fas fa-map-marker', Poblacion::class)
-        ]);
+        yield MenuItem::linkToCrud('Núcleos de población', 'fas fa-city', Municipio::class);
 
         yield MenuItem::subMenu('Categorías', 'fas fa-bars')->setSubItems([
             MenuItem::linkToCrud('Tipos de servicios', 'fas fa-concierge-bell', Categoria::class),

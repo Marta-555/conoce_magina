@@ -19,6 +19,9 @@ class Municipio
     private $nombre;
 
     #[ORM\Column(type: 'integer')]
+    private $habitantes;
+
+    #[ORM\Column(type: 'integer')]
     private $altitud;
 
     #[ORM\Column(type: 'float')]
@@ -30,12 +33,28 @@ class Municipio
     #[ORM\Column(type: 'float')]
     private $longitud;
 
-    #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: Poblacion::class, orphanRemoval: true)]
-    private $poblaciones;
+    #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: Alojamiento::class, orphanRemoval: true)]
+    private $alojamientos;
+
+    #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: Restaurante::class, orphanRemoval: true)]
+    private $restaurantes;
+
+    #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: Pub::class, orphanRemoval: true)]
+    private $pubs;
+
+    #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: ActividadOcio::class, orphanRemoval: true)]
+    private $actividadOcios;
+
+    #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: VisitaGuiada::class, orphanRemoval: true)]
+    private $visitaGuiadas;
 
     public function __construct()
     {
-        $this->poblaciones = new ArrayCollection();
+        $this->alojamientos = new ArrayCollection();
+        $this->restaurantes = new ArrayCollection();
+        $this->pubs = new ArrayCollection();
+        $this->actividadOcios = new ArrayCollection();
+        $this->visitaGuiadas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,6 +70,18 @@ class Municipio
     public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getHabitantes(): ?int
+    {
+        return $this->habitantes;
+    }
+
+    public function setHabitantes(int $habitantes): self
+    {
+        $this->habitantes = $habitantes;
 
         return $this;
     }
@@ -103,30 +134,90 @@ class Municipio
         return $this;
     }
 
-    /**
-     * @return Collection<int, Poblacion>
+     /**
+     * @return Collection<int, Alojamiento>
      */
-    public function getPoblaciones(): Collection
+    public function getAlojamientos(): Collection
     {
-        return $this->poblaciones;
+        return $this->alojamientos;
     }
 
-    public function addPoblacione(Poblacion $poblacione): self
+    public function addAlojamiento(Alojamiento $alojamiento): self
     {
-        if (!$this->poblaciones->contains($poblacione)) {
-            $this->poblaciones[] = $poblacione;
-            $poblacione->setMunicipio($this);
+        if (!$this->alojamientos->contains($alojamiento)) {
+            $this->alojamientos[] = $alojamiento;
+            $alojamiento->setMunicipio($this);
         }
 
         return $this;
     }
 
-    public function removePoblacione(Poblacion $poblacione): self
+    public function removeAlojamiento(Alojamiento $alojamiento): self
     {
-        if ($this->poblaciones->removeElement($poblacione)) {
+        if ($this->alojamientos->removeElement($alojamiento)) {
             // set the owning side to null (unless already changed)
-            if ($poblacione->getMunicipio() === $this) {
-                $poblacione->setMunicipio(null);
+            if ($alojamiento->getMunicipio() === $this) {
+                $alojamiento->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Restaurante>
+     */
+    public function getRestaurantes(): Collection
+    {
+        return $this->restaurantes;
+    }
+
+    public function addRestaurante(Restaurante $restaurante): self
+    {
+        if (!$this->restaurantes->contains($restaurante)) {
+            $this->restaurantes[] = $restaurante;
+            $restaurante->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRestaurante(Restaurante $restaurante): self
+    {
+        if ($this->restaurantes->removeElement($restaurante)) {
+            // set the owning side to null (unless already changed)
+            if ($restaurante->getMunicipio() === $this) {
+                $restaurante->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pub>
+     */
+    public function getPubs(): Collection
+    {
+        return $this->pubs;
+    }
+
+    public function addPub(Pub $pub): self
+    {
+        if (!$this->pubs->contains($pub)) {
+            $this->pubs[] = $pub;
+            $pub->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removePub(Pub $pub): self
+    {
+        if ($this->pubs->removeElement($pub)) {
+            // set the owning side to null (unless already changed)
+            if ($pub->getMunicipio() === $this) {
+                $pub->setMunicipio(null);
             }
         }
 
@@ -136,5 +227,65 @@ class Municipio
     public function __toString()
     {
         return $this->nombre;
+    }
+
+    /**
+     * @return Collection<int, ActividadOcio>
+     */
+    public function getActividadOcios(): Collection
+    {
+        return $this->actividadOcios;
+    }
+
+    public function addActividadOcio(ActividadOcio $actividadOcio): self
+    {
+        if (!$this->actividadOcios->contains($actividadOcio)) {
+            $this->actividadOcios[] = $actividadOcio;
+            $actividadOcio->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActividadOcio(ActividadOcio $actividadOcio): self
+    {
+        if ($this->actividadOcios->removeElement($actividadOcio)) {
+            // set the owning side to null (unless already changed)
+            if ($actividadOcio->getMunicipio() === $this) {
+                $actividadOcio->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, VisitaGuiada>
+     */
+    public function getVisitaGuiadas(): Collection
+    {
+        return $this->visitaGuiadas;
+    }
+
+    public function addVisitaGuiada(VisitaGuiada $visitaGuiada): self
+    {
+        if (!$this->visitaGuiadas->contains($visitaGuiada)) {
+            $this->visitaGuiadas[] = $visitaGuiada;
+            $visitaGuiada->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVisitaGuiada(VisitaGuiada $visitaGuiada): self
+    {
+        if ($this->visitaGuiadas->removeElement($visitaGuiada)) {
+            // set the owning side to null (unless already changed)
+            if ($visitaGuiada->getMunicipio() === $this) {
+                $visitaGuiada->setMunicipio(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -35,9 +35,9 @@ class Pub
     #[ORM\JoinColumn(nullable: false)]
     private $categoria;
 
-    #[ORM\ManyToOne(targetEntity: Poblacion::class, inversedBy: 'pubs')]
+    #[ORM\ManyToOne(targetEntity: Municipio::class, inversedBy: 'pubs')]
     #[ORM\JoinColumn(nullable: false)]
-    private $poblacion;
+    private $municipio;
 
     public function getId(): ?int
     {
@@ -140,14 +140,14 @@ class Pub
         return $this;
     }
 
-    public function getPoblacion(): ?Poblacion
+    public function getMunicipio(): ?Municipio
     {
-        return $this->poblacion;
+        return $this->municipio;
     }
 
-    public function setPoblacion(?Poblacion $poblacion): self
+    public function setMunicipio(?Municipio $municipio): self
     {
-        $this->poblacion = $poblacion;
+        $this->municipio = $municipio;
 
         return $this;
     }

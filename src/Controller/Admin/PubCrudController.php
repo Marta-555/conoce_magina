@@ -31,7 +31,7 @@ class PubCrudController extends AbstractCrudController
                 ->setUploadDir('public/images/uploads-pub')
                 ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]'),
             AssociationField::new('categoria', 'Servicio'),
-            AssociationField::new('poblacion', 'Población')
+            AssociationField::new('municipio', 'Municipio')
         ];
     }
 

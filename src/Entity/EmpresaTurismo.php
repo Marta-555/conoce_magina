@@ -34,10 +34,6 @@ class EmpresaTurismo
     #[ORM\JoinColumn(nullable: false)]
     private $tipoEmpresa;
 
-    #[ORM\ManyToOne(targetEntity: Poblacion::class, inversedBy: 'empresasTurismo')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $poblacion;
-
     #[ORM\OneToMany(mappedBy: 'empresa', targetEntity: VisitaGuiada::class, orphanRemoval: true)]
     private $visitasGuiadas;
 
@@ -123,18 +119,6 @@ class EmpresaTurismo
     public function setTipoEmpresa(?TipoEmpresa $tipoEmpresa): self
     {
         $this->tipoEmpresa = $tipoEmpresa;
-
-        return $this;
-    }
-
-    public function getPoblacion(): ?Poblacion
-    {
-        return $this->poblacion;
-    }
-
-    public function setPoblacion(?Poblacion $poblacion): self
-    {
-        $this->poblacion = $poblacion;
 
         return $this;
     }

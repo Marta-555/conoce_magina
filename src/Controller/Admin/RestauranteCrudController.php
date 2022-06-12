@@ -31,7 +31,7 @@ class RestauranteCrudController extends AbstractCrudController
                 ->setUploadDir('public/images/uploads')
                 ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]'),
             AssociationField::new('categoria', 'Servicio'),
-            AssociationField::new('poblacion', 'Población')
+            AssociationField::new('municipio', 'Municipio')
         ];
     }
 

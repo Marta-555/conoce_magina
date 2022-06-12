@@ -29,7 +29,8 @@ class VisitaGuiadaCrudController extends AbstractCrudController
                 ->setBasePath('images/uploads-actOcio')
                 ->setUploadDir('public/images/uploads-actOcio')
                 ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]'),
-            AssociationField::new('empresa', 'Empresa')
+            AssociationField::new('empresa', 'Empresa'),
+            AssociationField::new('municipio', 'Municipio')
         ];
     }
 

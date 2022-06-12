@@ -25,8 +25,7 @@ class EmpresaTurismoCrudController extends AbstractCrudController
             NumberField::new('telefono_1', 'Teléfono 1'),
             NumberField::new('telefono_2', 'Teléfono 2'),
             TextField::new('pagina_web', 'Web'),
-            AssociationField::new('tipoEmpresa', 'Actividad'),
-            AssociationField::new('poblacion', 'Población')
+            AssociationField::new('tipoEmpresa', 'Actividad')
         ];
     }
 

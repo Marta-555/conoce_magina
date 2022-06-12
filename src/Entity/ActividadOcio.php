@@ -29,6 +29,10 @@ class ActividadOcio
     #[ORM\JoinColumn(nullable: false)]
     private $empresa;
 
+    #[ORM\ManyToOne(targetEntity: Municipio::class, inversedBy: 'actividadOcios')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $municipio;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,5 +113,17 @@ class ActividadOcio
     public function __toString()
     {
         return $this->nombre;
+    }
+
+    public function getMunicipio(): ?Municipio
+    {
+        return $this->municipio;
+    }
+
+    public function setMunicipio(?Municipio $municipio): self
+    {
+        $this->municipio = $municipio;
+
+        return $this;
     }
 }
