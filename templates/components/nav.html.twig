@@ -15,11 +15,11 @@
         </li>
         <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Gastronomía</a>
           <ul class="dropdown-menu">
-            <li><a href="">Restaurantes</a></li>
-            <li><a href="">Ocio nocturno</a></li>
+            <li><a href="{{ path('app_restaurantes') }}">Restaurantes</a></li>
+            <li><a href="{{ path('app_pub') }}">Ocio nocturno</a></li>
           </ul>
         </li>
-        <li><a href="">Alojamientos</a></li>
+        <li><a href="{{ path('app_alojamientos') }}" id="loadAlojamiento">Alojamientos</a></li>
         <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Qué hacer</a>
           <ul class="dropdown-menu">
             <li><a href="">Visitas guiadas</a></li>
@@ -27,7 +27,6 @@
             <li><a href="">Rutas libres</a></li>
           </ul>
         </li>
-        <li><a href="">D.O.P</a></li>
 
         {% if app.user %}
 
