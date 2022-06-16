@@ -28,4 +28,10 @@ class MainController extends AbstractController
     {
         return $this->render('pueblos/index.html.twig');
     }
+
+    #[Route('/parque-natural', name: 'app_parque')]
+    public function parque(): Response
+    {
+        return $this->render('parque/index.html.twig');
+    }
 }

@@ -191,7 +191,7 @@
     <div class="row multi-columns-row">
       <div class="owl-carousel" data-items="3" data-pagination="false" data-navigation="false">
         <div class="owl-item">
-          <div class="col-sm-16 col-md-12 col-lg-12">
+          <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="gallery-item">
                 <div class="gallery-image">
                   <a href="{{ galeria.imagen1 }}" title="{{ galeria.titulo1 }}">
@@ -282,7 +282,7 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
-  <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+  {# <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script> #}
   <script src="{{ asset('js/ajax-call.js') }}"></script>
 {% endblock %}
