@@ -2,16 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Alojamiento;
-use App\Entity\Municipio;
+use App\Entity\ActividadOcio;
 use App\Entity\Pub;
+use App\Entity\Municipio;
+use App\Entity\Alojamiento;
 use App\Entity\Restaurante;
+use App\Entity\VisitaGuiada;
+use App\Entity\EmpresaTurismo;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class DatosController extends AbstractController
@@ -153,6 +156,119 @@ class DatosController extends AbstractController
             return $this->render('datos/index.html.twig', [
                 'titulo' => 'Ocio Nocturno',
                 'image' => 'assets/images/ocioNocturno.webp'
+            ]);
+        }
+
+    }
+
+
+    #[Route('/visitas', name: 'app_vGuiada')]
+    public function ajaxvGuiada(Request $request, ManagerRegistry $doctrine)
+    {
+        $visitas = $doctrine->getRepository(VisitaGuiada::class)->findAll();
+        $municipios = $doctrine->getRepository(Municipio::class)->findAll();
+        $empresas = $doctrine->getRepository(EmpresaTurismo::class)->findAll();
+
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $jsonData = array();
+
+            $idx = 0;
+            foreach($visitas as $visita) {
+                $temp = array(
+                   'nombre' => $visita->getNombre(),
+                   'descripcion' => $visita->getDescripcion(),
+                    'precio' => $visita->getPrecio(),
+                    'image' => $visita->getImageUrl(),
+                    'empresa_id' => $visita->getEmpresa()->getId(),
+                    'municipio_id' => $visita->getMunicipio()->getId(),
+                );
+
+                foreach($municipios as $municipio){
+                    if($temp['municipio_id'] == $municipio->getId()){
+                        $temp += ['muni_nombre' => $municipio->getNombre()];
+                    }
+                }
+
+                foreach($empresas as $empresa){
+                    if($temp['empresa_id'] == $empresa->getId()){
+                        $temp += ['empresa_nombre' => $empresa->getNombre()];
+                        $temp += ['empresa_tfno1' => $empresa->getTelefono1()];
+                        $temp += ['empresa_tfno2' => $empresa->getTelefono2()];
+                        $temp += ['empresa_web' => $empresa->getPaginaWeb()];
+                    }
+                }
+                $jsonData[$idx++] = $temp;
+            }
+            $cont = 0;
+            $lista = array();
+            foreach($municipios as $municipio) {
+                $muni = array(
+                    'municipio' => $municipio->getNombre(),
+                );
+                $lista[$cont++] = $muni;
+            }
+            $jsonData[$idx++] = $lista;
+            return new JsonResponse($jsonData);
+        } else {
+            return $this->render('datos/index.html.twig', [
+                'titulo' => 'Visitas Guiadas',
+                'image' => 'assets/images/visitaGuiada.webp'
+            ]);
+        }
+
+    }
+
+    #[Route('/turismo-activo', name: 'app_tActivo')]
+    public function ajaxtActivo(Request $request, ManagerRegistry $doctrine)
+    {
+        $actividades = $doctrine->getRepository(ActividadOcio::class)->findAll();
+        $municipios = $doctrine->getRepository(Municipio::class)->findAll();
+        $empresas = $doctrine->getRepository(EmpresaTurismo::class)->findAll();
+
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $jsonData = array();
+
+            $idx = 0;
+            foreach($actividades as $actividad) {
+                $temp = array(
+                   'nombre' => $actividad->getNombre(),
+                   'descripcion' => $actividad->getDescripcion(),
+                    'precio' => $actividad->getPrecio(),
+                    'image' => $actividad->getImageUrl(),
+                    'empresa_id' => $actividad->getEmpresa()->getId(),
+                    'municipio_id' => $actividad->getMunicipio()->getId(),
+                );
+
+                foreach($municipios as $municipio){
+                    if($temp['municipio_id'] == $municipio->getId()){
+                        $temp += ['muni_nombre' => $municipio->getNombre()];
+                    }
+                }
+
+                foreach($empresas as $empresa){
+                    if($temp['empresa_id'] == $empresa->getId()){
+                        $temp += ['empresa_nombre' => $empresa->getNombre()];
+                        $temp += ['empresa_tfno1' => $empresa->getTelefono1()];
+                        $temp += ['empresa_tfno2' => $empresa->getTelefono2()];
+                        $temp += ['empresa_web' => $empresa->getPaginaWeb()];
+                    }
+                }
+                $jsonData[$idx++] = $temp;
+            }
+            $cont = 0;
+            $lista = array();
+            foreach($municipios as $municipio) {
+                $muni = array(
+                    'municipio' => $municipio->getNombre(),
+                );
+                $lista[$cont++] = $muni;
+            }
+            $jsonData[$idx++] = $lista;
+            return new JsonResponse($jsonData);
+        } else {
+            return $this->render('datos/index.html.twig', [
+                'titulo' => 'Turismo activo',
+                'image' => 'assets/images/visitaGuiada.webp'
             ]);
         }
 

@@ -10,7 +10,7 @@ $(document).ready(function(){
             success: function(data, status) {
                     var municipios = data.pop();
                     pintarFiltros(municipios);
-                    pintarDatos(data);
+                    pintarServicio(data);
                     activarFiltros();
                     activarBuscador();
                     // activarPaginador();
@@ -28,7 +28,7 @@ $(document).ready(function(){
             success: function(data, status) {
                     var municipios = data.pop();
                     pintarFiltros(municipios);
-                    pintarDatos(data);
+                    pintarServicio(data);
                     activarFiltros();
                     activarBuscador();
                     // activarPaginador();
@@ -45,7 +45,7 @@ $(document).ready(function(){
             success: function(data, status) {
                     var municipios = data.pop();
                     pintarFiltros(municipios);
-                    pintarDatos(data);
+                    pintarServicio(data);
                     activarFiltros();
                     activarBuscador();
                     // activarPaginador();
@@ -54,6 +54,40 @@ $(document).ready(function(){
             }
         });
 
+    } else if (url === '/visitas') {
+        $.ajax({
+            url:        '/visitas',
+            type:       'POST',
+            dataType:   'json',
+            async:      true,
+            success: function(data, status) {
+                var municipios = data.pop();
+                pintarFiltros(municipios);
+                pintarActividad(data);
+                activarFiltros();
+                activarBuscador();
+                // activarPaginador();
+            }, error : function(xhr, textStatus, errorThrown) {
+                alert('Ajax request failed.');
+            }
+        });
+    } else if (url === '/turismo-activo') {
+        $.ajax({
+            url:        '/turismo-activo',
+            type:       'POST',
+            dataType:   'json',
+            async:      true,
+            success: function(data, status) {
+                var municipios = data.pop();
+                pintarFiltros(municipios);
+                pintarActividad(data);
+                activarFiltros();
+                activarBuscador();
+                // activarPaginador();
+            }, error : function(xhr, textStatus, errorThrown) {
+                alert('Ajax request failed.');
+            }
+        });
     } else {
         "pagina no encontrada";
     }
@@ -121,7 +155,7 @@ function pintarFiltros(municipios) {
     }
 }
 
-function pintarDatos(data) {
+function pintarServicio(data) {
     //Rellenamos el contenedor
     $('#contenedor').html('');
 
@@ -161,5 +195,60 @@ function pintarDatos(data) {
         $('#contenedor').append(div);
     }
 }
+
+function pintarActividad(data) {
+     //Rellenamos el contenedor
+    $('#contenedor').html('');
+
+    for(i = 0; i < data.length; i++) {
+        datos = data[i];
+        //Creamos la estructura
+        var div = $('<div id="item" class="col-sm-4 col-md-4 col-lg-4 '+ datos['muni_nombre'] +'"></div>');
+        var div2 = $('<div class="post"></div>');
+
+        //Campo de imagen
+        if(datos['image'] != null){
+            var divImagen = $('<div class="post-thumbnail align-center"><img src="'+ datos['image'] +'" alt="Blog-post Thumbnail"/></div>');
+        } else {
+            var divImagen = $('<div class="post-thumbnail align-center"><img src="images/sinImagen.webp" alt="Blog-post Thumbnail"/></div>');
+        }
+        //Campo nombre
+        var divNombre = $('<div class="post-header font-alt text-center"><h2 class="post-title"><strong>'+ datos['nombre'] +'</strong></h2></div>');
+
+        //Campos de información
+        var divDatos = $('\
+        <div class="post-entry"> \
+            <div role="tabpanel"> \
+                <ul class="nav nav-tabs" role="tablist"> \
+                    <li class="active"><a href="#precio_'+ i +'" data-toggle="tab">Precio</a></li> \
+                    <li><a href="#descrip_'+ i +'" data-toggle="tab">Descripción</a></li> \
+                    <li><a href="#contact_'+ i +'" data-toggle="tab">Contacto</a></li> \
+                </ul> \
+                <div class="tab-content"> \
+                    <div class="tab-pane active text-center" id="precio_'+ i +'">Precio por persona: '+ datos['precio'] +' €</div> \
+                    <div class="tab-pane text-justify" id="descrip_'+ i +'">'+ datos['descripcion'] +'</div> \
+                    <div class="tab-pane" id="contact_'+ i +'"> \
+                        <p class="text-center">'+ datos['empresa_nombre'] +'<br> \
+                        '+ datos['empresa_tfno1'] + (!datos['empresa_tfno2']? '':' / '+ datos['empresa_tfno2'] +'') +'<br> \
+                        '+ (!datos['empresa_web']? '': '<a href="'+  datos['empresa_web'] +'">'+ datos['empresa_web'] +'</a></p>') +' \
+                    </div> \
+                </div> \
+            </div> \
+        </div>');
+
+        //Añadimos los elementos a la estructura
+        div2.append(divImagen, divNombre, divDatos);
+        div.append(div2);
+        //Añadimos la estructura al div
+        $('#contenedor').append(div);
+    }
+}
+
+
+
+
+
+
+
 
 
