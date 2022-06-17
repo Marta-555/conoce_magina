@@ -55,7 +55,7 @@ class TipoRuta
     {
         if (!$this->rutas->contains($ruta)) {
             $this->rutas[] = $ruta;
-            $ruta->addTipoRutum($this);
+            $ruta->addTipoRuta($this);
         }
 
         return $this;
@@ -64,7 +64,7 @@ class TipoRuta
     public function removeRuta(Ruta $ruta): self
     {
         if ($this->rutas->removeElement($ruta)) {
-            $ruta->removeTipoRutum($this);
+            $ruta->removeTipoRuta($this);
         }
 
         return $this;

@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\RutaRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\TipoRuta;
+use App\Entity\Municipio;
+use App\Entity\PuntoInteres;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RutaRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: RutaRepository::class)]
 class Ruta
@@ -14,6 +17,9 @@ class Ruta
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $titulo;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $dificultad;
@@ -33,11 +39,22 @@ class Ruta
     #[ORM\Column(type: 'string', length: 1000)]
     private $descripcion;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
+
     #[ORM\OneToMany(mappedBy: 'ruta', targetEntity: PuntoInteres::class, orphanRemoval: true)]
     private $puntoInteres;
 
     #[ORM\ManyToMany(targetEntity: TipoRuta::class, inversedBy: 'rutas')]
     private $tipoRuta;
+
+    #[ORM\ManyToOne(targetEntity: Municipio::class, inversedBy: 'rutas')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $municipio;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'rutas')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     public function __construct()
     {
@@ -48,6 +65,18 @@ class Ruta
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitulo(): ?string
+    {
+        return $this->titulo;
+    }
+
+    public function setTitulo(string $titulo): self
+    {
+        $this->titulo = $titulo;
+
+        return $this;
     }
 
     public function getDificultad(): ?string
@@ -122,6 +151,30 @@ class Ruta
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+        if (strpos($this->image, '/') !== false) {
+            return $this->image;
+        }
+
+        return sprintf('images/uploads-alojamiento/%s', $this->image);
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, PuntoInteres>
      */
@@ -160,18 +213,47 @@ class Ruta
         return $this->tipoRuta;
     }
 
-    public function addTipoRutum(TipoRuta $tipoRutum): self
+    public function addTipoRuta(TipoRuta $tipoRut): self
     {
-        if (!$this->tipoRuta->contains($tipoRutum)) {
-            $this->tipoRuta[] = $tipoRutum;
+        if (!$this->tipoRuta->contains($tipoRut)) {
+            $this->tipoRuta[] = $tipoRut;
         }
 
         return $this;
     }
 
-    public function removeTipoRutum(TipoRuta $tipoRutum): self
+    public function removeTipoRuta(TipoRuta $tipoRut): self
     {
-        $this->tipoRuta->removeElement($tipoRutum);
+        $this->tipoRuta->removeElement($tipoRut);
+
+        return $this;
+    }
+
+    public function getMunicipio(): ?Municipio
+    {
+        return $this->municipio;
+    }
+
+    public function setMunicipio(?Municipio $municipio): self
+    {
+        $this->municipio = $municipio;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->titulo;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

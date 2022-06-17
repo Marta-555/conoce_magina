@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\MunicipioRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Ruta;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MunicipioRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: MunicipioRepository::class)]
 class Municipio
@@ -48,6 +49,9 @@ class Municipio
     #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: VisitaGuiada::class, orphanRemoval: true)]
     private $visitaGuiadas;
 
+    #[ORM\OneToMany(mappedBy: 'municipio', targetEntity: Ruta::class, orphanRemoval: true)]
+    private $rutas;
+
     public function __construct()
     {
         $this->alojamientos = new ArrayCollection();
@@ -55,6 +59,7 @@ class Municipio
         $this->pubs = new ArrayCollection();
         $this->actividadOcios = new ArrayCollection();
         $this->visitaGuiadas = new ArrayCollection();
+        $this->rutas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -283,6 +288,36 @@ class Municipio
             // set the owning side to null (unless already changed)
             if ($visitaGuiada->getMunicipio() === $this) {
                 $visitaGuiada->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+     /**
+     * @return Collection<int, Ruta>
+     */
+    public function getRutas(): Collection
+    {
+        return $this->rutas;
+    }
+
+    public function addRuta(Ruta $ruta): self
+    {
+        if (!$this->rutas->contains($ruta)) {
+            $this->rutas[] = $ruta;
+            $ruta->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRuta(Ruta $ruta): self
+    {
+        if ($this->rutas->removeElement($ruta)) {
+            // set the owning side to null (unless already changed)
+            if ($ruta->getMunicipio() === $this) {
+                $ruta->setMunicipio(null);
             }
         }
 
