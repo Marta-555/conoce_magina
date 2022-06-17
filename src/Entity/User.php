@@ -48,6 +48,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $active;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
+
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ruta::class, orphanRemoval: true)]
     private $rutas;
 
@@ -171,6 +174,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        if (!$this->image) {
+            return null;
+        }
+        if (strpos($this->image, '/') !== false) {
+            return $this->image;
+        }
+
+        return sprintf('images/uploads-user/%s', $this->image);
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -165,7 +165,7 @@ class Ruta
             return $this->image;
         }
 
-        return sprintf('images/uploads-alojamiento/%s', $this->image);
+        return sprintf('images/uploads-ruta/%s', $this->image);
     }
 
     public function setImage(?string $image): self

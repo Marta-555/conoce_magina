@@ -84,7 +84,7 @@ class PuntoInteres
             return $this->image;
         }
 
-        return sprintf('images/uploads-alojamiento/%s', $this->image);
+        return sprintf('images/uploads-pInteres/%s', $this->image);
     }
 
     public function setImage(string $image): self
