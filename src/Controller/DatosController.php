@@ -268,16 +268,10 @@ class DatosController extends AbstractController
         } else {
             return $this->render('datos/index.html.twig', [
                 'titulo' => 'Turismo activo',
-                'image' => 'assets/images/visitaGuiada.webp'
+                'image' => 'assets/images/turismoActivo.webp'
             ]);
         }
 
     }
 
-
-    // #[Route('/alojamientos', name: 'app_alojamientos')]
-    // public function index(): Response
-    // {
-    //     return $this->render('datos/index.html.twig');
-    // }
 }
