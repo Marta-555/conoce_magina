@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RutaRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RutaRepository::class)]
 class Ruta
@@ -19,24 +20,31 @@ class Ruta
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $titulo;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $dificultad;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'float')]
+    #[Assert\NotBlank]
     private $longitud;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'float')]
+    #[Assert\NotBlank]
     private $tiempo;
 
-    #[ORM\Column(type: 'text')]
-    private $coordenadas;
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
+    #[Assert\Url]
+    private $mapa;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $desnivel;
 
     #[ORM\Column(type: 'string', length: 1000)]
+    #[Assert\NotBlank]
     private $descripcion;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -45,21 +53,26 @@ class Ruta
     #[ORM\OneToMany(mappedBy: 'ruta', targetEntity: PuntoInteres::class, orphanRemoval: true)]
     private $puntoInteres;
 
-    #[ORM\ManyToMany(targetEntity: TipoRuta::class, inversedBy: 'rutas')]
-    private $tipoRuta;
-
     #[ORM\ManyToOne(targetEntity: Municipio::class, inversedBy: 'rutas')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
     private $municipio;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'rutas')]
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
+    #[ORM\Column(type: 'datetime')]
+    private $fecha_publicacion;
+
+    #[ORM\ManyToOne(targetEntity: TipoRuta::class, inversedBy: 'rutas')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
+    private $tipoRuta;
+
     public function __construct()
     {
         $this->puntoInteres = new ArrayCollection();
-        $this->tipoRuta = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,14 +128,14 @@ class Ruta
         return $this;
     }
 
-    public function getCoordenadas(): ?string
+    public function getMapa(): ?string
     {
-        return $this->coordenadas;
+        return $this->mapa;
     }
 
-    public function setCoordenadas(string $coordenadas): self
+    public function setMapa(string $mapa): self
     {
-        $this->coordenadas = $coordenadas;
+        $this->mapa = $mapa;
 
         return $this;
     }
@@ -205,30 +218,6 @@ class Ruta
         return $this;
     }
 
-    /**
-     * @return Collection<int, TipoRuta>
-     */
-    public function getTipoRuta(): Collection
-    {
-        return $this->tipoRuta;
-    }
-
-    public function addTipoRuta(TipoRuta $tipoRut): self
-    {
-        if (!$this->tipoRuta->contains($tipoRut)) {
-            $this->tipoRuta[] = $tipoRut;
-        }
-
-        return $this;
-    }
-
-    public function removeTipoRuta(TipoRuta $tipoRut): self
-    {
-        $this->tipoRuta->removeElement($tipoRut);
-
-        return $this;
-    }
-
     public function getMunicipio(): ?Municipio
     {
         return $this->municipio;
@@ -241,11 +230,6 @@ class Ruta
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->titulo;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -256,5 +240,34 @@ class Ruta
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getFechaPublicacion(): ?\DateTimeInterface
+    {
+        return $this->fecha_publicacion;
+    }
+
+    public function setFechaPublicacion(\DateTimeInterface $fecha_publicacion): self
+    {
+        $this->fecha_publicacion = $fecha_publicacion;
+
+        return $this;
+    }
+
+    public function getTipoRuta(): ?TipoRuta
+    {
+        return $this->tipoRuta;
+    }
+
+    public function setTipoRuta(?TipoRuta $tipoRuta): self
+    {
+        $this->tipoRuta = $tipoRuta;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->titulo;
     }
 }

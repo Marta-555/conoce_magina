@@ -18,7 +18,7 @@ class TipoRuta
     #[ORM\Column(type: 'string', length: 255)]
     private $descripcion;
 
-    #[ORM\ManyToMany(targetEntity: Ruta::class, mappedBy: 'tipoRuta')]
+    #[ORM\OneToMany(mappedBy: 'tipoRuta', targetEntity: Ruta::class, orphanRemoval: true)]
     private $rutas;
 
     public function __construct()
@@ -55,7 +55,7 @@ class TipoRuta
     {
         if (!$this->rutas->contains($ruta)) {
             $this->rutas[] = $ruta;
-            $ruta->addTipoRuta($this);
+            $ruta->setTipoRuta($this);
         }
 
         return $this;
@@ -64,9 +64,18 @@ class TipoRuta
     public function removeRuta(Ruta $ruta): self
     {
         if ($this->rutas->removeElement($ruta)) {
-            $ruta->removeTipoRuta($this);
+            // set the owning side to null (unless already changed)
+            if ($ruta->getTipoRuta() === $this) {
+                $ruta->setTipoRuta(null);
+            }
         }
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->descripcion;
+    }
+
 }
