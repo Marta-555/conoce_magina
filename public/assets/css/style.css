@@ -1312,6 +1312,12 @@ General Styles - Owlcarousel
   padding: 0 1% 0 8%;
 }
 
+#navbar-user {
+  height: 24px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+
 .navbar-nav {
   margin: 18px -15px;
 }
