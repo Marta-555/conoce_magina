@@ -54,9 +54,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ruta::class, orphanRemoval: true)]
     private $rutas;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PuntoInteres::class, orphanRemoval: true)]
+    private $puntoInteres;
+
     public function __construct()
     {
         $this->rutas = new ArrayCollection();
+        $this->puntoInteres = new ArrayCollection();
     }
 
 
@@ -236,6 +240,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($ruta->getUser() === $this) {
                 $ruta->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PuntoInteres>
+     */
+    public function getPuntoInteres(): Collection
+    {
+        return $this->puntoInteres;
+    }
+
+    public function addPuntoIntere(PuntoInteres $puntoIntere): self
+    {
+        if (!$this->puntoInteres->contains($puntoIntere)) {
+            $this->puntoInteres[] = $puntoIntere;
+            $puntoIntere->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePuntoIntere(PuntoInteres $puntoIntere): self
+    {
+        if ($this->puntoInteres->removeElement($puntoIntere)) {
+            // set the owning side to null (unless already changed)
+            if ($puntoIntere->getUser() === $this) {
+                $puntoIntere->setUser(null);
             }
         }
 

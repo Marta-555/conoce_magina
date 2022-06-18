@@ -45,9 +45,9 @@
               {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('admin') }}">Panel de Gestión</a></li>
               {% else %}
-                <li><a href="{{ path('app_perfil') }}">Perfil</a></li>
-                <li><a href="{{ path('app_perfil') }}">Rutas publicadas</a></li>
-                <li><a href="{{ path('app_perfil') }}">Nueva ruta</a></li>
+                <li><a href="">Perfil</a></li>
+                <li><a href="">Rutas publicadas</a></li>
+                <li><a href="{{ path('app_newRuta') }}">Nueva ruta</a></li>
               {% endif %}
 
               <li><a href="{{ path('app_logout') }}">Cerrar sesión</a></li>

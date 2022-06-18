@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\PuntoInteres;
 use DateTime;
 use App\Entity\Ruta;
+use App\Form\PuntoInteresFormType;
 use App\Form\RutaType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +30,8 @@ class PerfilController extends AbstractController
     }
 
 
-    #[Route('/perfil', name: 'app_perfil')]
-    public function index(Request $request, SluggerInterface $slugger): Response
+    #[Route('/perfil', name: 'app_newRuta')]
+    public function nuevaRuta(Request $request, SluggerInterface $slugger): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $userActive = $this->getUser()->getActive();
@@ -43,8 +45,9 @@ class PerfilController extends AbstractController
 
         } else {
 
-            $ruta = new Ruta();
             $usuario = $this->getUser();
+
+            $ruta = new Ruta();
             $form = $this->createForm(RutaType::class, $ruta);
             $form->handleRequest($request);
 
@@ -73,11 +76,43 @@ class PerfilController extends AbstractController
 
                 $this->em->persist($ruta);
                 $this->em->flush();
-                return $this->redirectToRoute('app_perfil');
+                return $this->redirectToRoute('app_newRuta');
             }
 
-            return $this->render('perfil/index.html.twig', [
+            $puntoI = new PuntoInteres();
+            $form2 = $this->createForm(PuntoInteresFormType::class, $puntoI);
+            $form2->handleRequest($request);
+
+            if ($form2->isSubmitted() && $form2->isValid()) {
+                $now = new DateTime();
+                $puntoI->setFechaPublicacion($now);
+                $puntoI->setUser($usuario);
+                $foto = $form2->get('foto')->getData();
+
+                if($foto) {
+                    $originalFoto = pathinfo($foto->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFoto = $slugger->slug($originalFoto);
+                    $newFoto = $safeFoto.'-'.uniqid().'.'.$foto->guessExtension();
+
+                    try {
+                        $foto->move(
+                            $this->getParameter('puntoInt_directory'),
+                            $newFoto
+                        );
+                    } catch (FileException $e) {
+                        return $e->getMessage();
+                    }
+                    $puntoI->setFoto($newFoto);
+                }
+                $this->em->persist($puntoI);
+                $this->em->flush();
+
+                return $this->redirectToRoute('app_newRuta');
+            }
+
+            return $this->render('perfil/newRuta.html.twig', [
                 'form' => $form->createView(),
+                'form2' => $form2->createView(),
                 'nombre' => 'Nueva ruta'
             ]);
         }

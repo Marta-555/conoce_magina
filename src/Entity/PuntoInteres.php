@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PuntoInteresRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PuntoInteresRepository::class)]
 class PuntoInteres
@@ -14,20 +15,29 @@ class PuntoInteres
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $titulo;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $descripcion;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $coordenadas;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $image;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $foto;
 
     #[ORM\ManyToOne(targetEntity: Ruta::class, inversedBy: 'puntoInteres')]
     #[ORM\JoinColumn(nullable: false)]
     private $ruta;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'puntoInteres')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
+    #[ORM\Column(type: 'datetime')]
+    private $fecha_publicacion;
 
     public function getId(): ?int
     {
@@ -70,26 +80,26 @@ class PuntoInteres
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getFoto(): ?string
     {
-        return $this->image;
+        return $this->foto;
     }
 
-    public function getImageUrl(): ?string
+    public function getFotoUrl(): ?string
     {
-        if (!$this->image) {
+        if (!$this->foto) {
             return null;
         }
-        if (strpos($this->image, '/') !== false) {
-            return $this->image;
+        if (strpos($this->foto, '/') !== false) {
+            return $this->foto;
         }
 
-        return sprintf('images/uploads-pInteres/%s', $this->image);
+        return sprintf('images/uploads-pInteres/%s', $this->foto);
     }
 
-    public function setImage(string $image): self
+    public function setFoto(string $foto): self
     {
-        $this->image = $image;
+        $this->foto = $foto;
 
         return $this;
     }
@@ -110,4 +120,29 @@ class PuntoInteres
     {
         return $this->titulo;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFechaPublicacion(): ?\DateTimeInterface
+    {
+        return $this->fecha_publicacion;
+    }
+
+    public function setFechaPublicacion(\DateTimeInterface $fecha_publicacion): self
+    {
+        $this->fecha_publicacion = $fecha_publicacion;
+
+        return $this;
+    }
+
 }
