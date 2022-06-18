@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Ruta;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -45,6 +46,18 @@ class RutaRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findUser(User $user)
+    {
+        $id_user = $user->getId();
+
+        return $this->createQueryBuilder('r')
+        ->where('r.user = :val')
+        ->setParameter('val', $id_user)
+        ->getQuery()
+        ->getResult()
+        ;
     }
 
     // /**
