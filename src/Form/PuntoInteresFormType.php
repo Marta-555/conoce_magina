@@ -39,7 +39,6 @@ class PuntoInteresFormType extends AbstractType
                 'required' => false,
             ])
             ->add('ruta')
-            ->add('submit', SubmitType::class)
         ;
     }
 

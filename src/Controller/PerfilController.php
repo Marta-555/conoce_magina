@@ -113,7 +113,7 @@ class PerfilController extends AbstractController
             return $this->render('perfil/newRuta.html.twig', [
                 'form' => $form->createView(),
                 'form2' => $form2->createView(),
-                'nombre' => 'Nueva ruta'
+                'nombre' => 'Ayúdanos a conocer nuevas rutas y puntos de interés'
             ]);
         }
 
