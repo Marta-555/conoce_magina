@@ -30,7 +30,7 @@ class PerfilController extends AbstractController
     }
 
 
-    #[Route('/perfil', name: 'app_newRuta')]
+    #[Route('/perfil-nuevaRuta', name: 'app_newRuta')]
     public function nuevaRuta(Request $request, SluggerInterface $slugger): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
@@ -39,7 +39,7 @@ class PerfilController extends AbstractController
         if ($userActive != true){
             $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
 
-            return $this->render('perfil/index.html.twig', [
+            return $this->render('perfil/newRuta.html.twig', [
                 'errorEmail' => 'error'
             ]);
 
@@ -117,5 +117,25 @@ class PerfilController extends AbstractController
             ]);
         }
 
+    }
+
+    #[Route('/perfil-listado', name: 'app_listado')]
+    public function listado(): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $userActive = $this->getUser()->getActive();
+
+        if ($userActive != true){
+            $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
+
+            return $this->render('perfil/listado.html.twig', [
+                'errorEmail' => 'error'
+            ]);
+
+        } else {
+            return $this->render('perfil/listado.html.twig', [
+                'nombre' => 'Rutas publicadas'
+            ]);
+        }
     }
 }

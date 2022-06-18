@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+<section class="module bg-dark-30 about-page-header" data-background="assets/images/perfil/portada.webp">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <h2 class="module-title mb-0">{{ nombre }}</h2>
+          </div>
+      </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block body %}
+<section class="module">
+    <div class="container">
+
+        {% if errorEmail is defined %}
+            {% for flash in app.flashes('error') %}
+                <div class="alert alert-danger">{{ flash }}</div>
+            {% endfor %}
+        {% else %}
+            {% for flash in app.flashes('success') %}
+                <div class="alert alert-success">{{ flash }}</div>
+            {% endfor %}
+
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+              </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="assets/js/ajax-table.js"></script>
+{% endblock %}
