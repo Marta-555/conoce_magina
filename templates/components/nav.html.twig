@@ -31,7 +31,7 @@
         {% if app.user %}
 
           <li class="dropdown">
-            <a class="" href="#" data-toggle="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
               {{ app.user.name }}
               {% if app.user.image is null %}
                   <img id="navbar-user" src="images/usuario.webp" alt="user">
@@ -52,9 +52,6 @@
 
               <li><a href="{{ path('app_logout') }}">Cerrar sesión</a></li>
             </ul>
-          </li>
-          <li>
-
           </li>
         {% else %}
           <li><a href="{{ path('app_login') }}">Login</a></li>
