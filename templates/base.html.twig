@@ -10,7 +10,7 @@
 
         {% block stylesheets %}
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i&display=swap" rel="stylesheet" />
-            {{ encore_entry_link_tags('app') }}
+
 
             <link href="assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
             <!-- Template specific stylesheets-->
@@ -26,8 +26,7 @@
             <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
             <link href="assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
             <!-- Main stylesheet and color file-->
-            <link href="assets/css/style.css" rel="stylesheet">
-            <link id="color-scheme" href="assets/css/colors/default.css" rel="stylesheet">
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
@@ -52,7 +51,7 @@
         </main>
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+            {# {{ encore_entry_script_tags('app') }} #}
 
             <script src="assets/lib/jquery/dist/jquery.js"></script>
             <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>

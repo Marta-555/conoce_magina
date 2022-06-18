@@ -9,6 +9,7 @@
 
 		.content-box-image {
 			border-radius: 6px;
+			-webkit-backface-visibility: hidden;
 			backface-visibility: hidden;
 			overflow: hidden;
 			-webkit-box-shadow: 1px 2px 10px  rgba(0, 0, 0, 0.15);
