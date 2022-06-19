@@ -1,9 +1,10 @@
 $(document).ready(function(){
 
     var url = window.location.pathname;
-    if (url === '/alojamiento') {
+    console.log(url);
+    if (url === '/alojamiento' || url === '/restaurantes' || url === '/nocturno') {
         $.ajax({
-            url:        '/alojamiento',
+            url:        url,
             type:       'POST',
             dataType:   'json',
             async:      true,
@@ -19,44 +20,9 @@ $(document).ready(function(){
             }
         });
 
-    } else if (url === '/restaurantes') {
+    } else if (url === '/visitas' || url === '/turismo-activo') {
         $.ajax({
-            url:        '/restaurantes',
-            type:       'POST',
-            dataType:   'json',
-            async:      true,
-            success: function(data, status) {
-                    var municipios = data.pop();
-                    pintarFiltros(municipios);
-                    pintarServicio(data);
-                    activarFiltros();
-                    activarBuscador();
-                    // activarPaginador();
-            }, error : function(xhr, textStatus, errorThrown) {
-                alert('Ajax request failed.');
-            }
-        });
-    } else if (url === '/ocio-nocturno') {
-        $.ajax({
-            url:        '/ocio-nocturno',
-            type:       'POST',
-            dataType:   'json',
-            async:      true,
-            success: function(data, status) {
-                    var municipios = data.pop();
-                    pintarFiltros(municipios);
-                    pintarServicio(data);
-                    activarFiltros();
-                    activarBuscador();
-                    // activarPaginador();
-            }, error : function(xhr, textStatus, errorThrown) {
-                alert('Ajax request failed.');
-            }
-        });
-
-    } else if (url === '/visitas') {
-        $.ajax({
-            url:        '/visitas',
+            url:        url,
             type:       'POST',
             dataType:   'json',
             async:      true,
@@ -71,18 +37,20 @@ $(document).ready(function(){
                 alert('Ajax request failed.');
             }
         });
-    } else if (url === '/turismo-activo') {
+
+    } else if (url === '/rutas') {
         $.ajax({
-            url:        '/turismo-activo',
+            url:        '/rutas',
             type:       'POST',
             dataType:   'json',
             async:      true,
             success: function(data, status) {
+                console.log(data);
                 var municipios = data.pop();
                 pintarFiltros(municipios);
-                pintarActividad(data);
-                activarFiltros();
-                activarBuscador();
+                pintarRuta(data);
+                // activarFiltros();
+                // activarBuscador();
                 // activarPaginador();
             }, error : function(xhr, textStatus, errorThrown) {
                 alert('Ajax request failed.');
@@ -242,6 +210,79 @@ function pintarActividad(data) {
         //Añadimos la estructura al div
         $('#contenedor').append(div);
     }
+}
+
+
+function pintarRuta(data) {
+    //Rellenamos el contenedor
+   $('#contenedor').html('');
+
+   for(i = 0; i < data.length; i++) {
+       datos = data[i];
+       //Creamos la estructura
+       var div = $('<div id="item" class="col-sm-4 col-md-4 col-lg-4 '+ datos['muni_nombre'] +'"></div>');
+       var div2 = $('<div class="post"></div>');
+
+       //Campo de imagen
+       if(datos['image'] != null){
+           var divImagen = $('<div class="post-thumbnail align-center"><img src="'+ datos['image'] +'" alt="Blog-post Thumbnail"/></div>');
+       } else {
+           var divImagen = $('<div class="post-thumbnail align-center"><img src="images/sinImagen.webp" alt="Blog-post Thumbnail"/></div>');
+       }
+       //Campo nombre
+       var divNombre = $('<div class="post-header font-alt text-center"><h2 class="post-title"><strong>'+ datos['titulo'] +'</strong></h2></div>');
+
+       //Campos de información
+       var divDatos = $('\
+       <div class="post-entry text-center"> \
+            <p class="text-center"><strong>Dificultad: </strong>'+ datos['dificultad'] +'&nbsp;&nbsp;&nbsp;&nbsp;<strong>Longitud: </strong>'+ datos['longitud'] +' Km</p>\
+            <button type="button" class="btn btn-border-d btn-circle" data-toggle="modal" data-target="ventana_'+ datos['id'] +'">Detalles</button>\
+       </div>');
+       //Añadimos los elementos a la estructura
+       var modal = rellenarModal(datos);
+       div2.append(divImagen, divNombre, divDatos, modal);
+       div.append(div2);
+       //Añadimos la estructura al div
+       $('#contenedor').append(div);
+
+
+
+    }
+}
+
+
+function rellenarModal(datos){
+    var divModal = $('\
+    <!-- Modal -->\
+    <div class="modal fade" id="ventana_'+ datos['id'] +'"role="dialog">\
+        <div class="modal-dialog">\
+            <div class="modal-content">\
+                <div class="modal-header">\
+                    <h5 class="modal-title">'+ datos['titulo'] +'</h5>\
+                    <button type="button" class="close" data-dismiss="modal">&times;\
+                    </button>\
+                </div>\
+                <div class="modal-body">\
+                    <p>'+ datos['descripcion'] +'</p>\
+                    <p>'+ datos['dificultad'] +'</p>\
+                    <p>'+ datos['longitud'] +'</p>\
+                    <p>'+ datos['tiempo'] +'</p>\
+                    <iframe src="'+ datos['mapa'] +'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>\
+                    <p>'+ datos['desnivel'] +'</p>\
+                    <img src="'+ datos['image'] +'">\
+                    <p>'+ datos['municipio'] +'</p>\
+                    <p>'+ datos['tipoRuta'] +'</p>\
+                    <p>'+ datos['fecha_publicacion'] +'</p>\
+                    <p>'+ datos['user'] +'</p>\
+                    <p>'+ datos['puntoInteres'] +'</p>\
+                </div>\
+                <div class="modal-footer">\
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>\
+                </div>\
+            </div>\
+        </div>\
+    </div>');
+    return divModal;
 }
 
 

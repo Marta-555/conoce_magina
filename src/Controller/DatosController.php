@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\ActividadOcio;
 use App\Entity\Pub;
+use App\Entity\Ruta;
 use App\Entity\Municipio;
 use App\Entity\Alojamiento;
 use App\Entity\Restaurante;
+use App\Entity\PuntoInteres;
 use App\Entity\VisitaGuiada;
+use App\Entity\ActividadOcio;
 use App\Entity\EmpresaTurismo;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -269,6 +271,70 @@ class DatosController extends AbstractController
             return $this->render('datos/index.html.twig', [
                 'titulo' => 'Turismo activo',
                 'image' => 'assets/images/turismoActivo.webp'
+            ]);
+        }
+
+    }
+
+
+    #[Route('/rutas', name: 'app_rutas')]
+    public function ajaxRutas(Request $request, ManagerRegistry $doctrine)
+    {
+        $rutas = $doctrine->getRepository(Ruta::class)->findAll();
+        $puntosInt = $doctrine->getRepository(PuntoInteres::class)->findAll();
+        $municipios = $doctrine->getRepository(Municipio::class)->findAll();
+
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $jsonData = array();
+
+            $idx = 0;
+            foreach($rutas as $ruta) {
+                $temp = array(
+                    'id' => $ruta->getId(),
+                    'titulo' => $ruta->getTitulo(),
+                    'descripcion' => $ruta->getDescripcion(),
+                    'dificultad' => $ruta->getDificultad(),
+                    'longitud' => $ruta->getLongitud(),
+                    'tiempo' => $ruta->getTiempo(),
+                    'mapa' => $ruta->getMapa(),
+                    'desnivel' => $ruta->getDesnivel(),
+                    'image' => $ruta->getImageUrl(),
+                    'municipio' => $ruta->getMunicipio()->getNombre(),
+                    'tipoRuta' => $ruta->getTipoRuta()->getDescripcion(),
+                    'fecha_publicacion' => $ruta->getFechaPublicacion(),
+                    'user' => $ruta->getUser()->getName(),
+                );
+
+                foreach($puntosInt as $punto){
+                    if($temp['id'] == $punto->getRuta()->getId()){
+                        $pInteres = array();
+                        $pInteres += ['p_titulo' => $punto->getTitulo()];
+                        $pInteres += ['p_descrip' => $punto->getDescripcion()];
+                        $pInteres += ['p_coord' => $punto->getCoordenadas()];
+                        $pInteres += ['p_foto' => $punto->getFotoUrl()];
+                        $pInteres += ['p_user' => $punto->getUser()->getName()];
+                        $temp += ['puntoInteres' => $pInteres];
+                    } else {
+                        $temp += ['puntoInteres' => "" ];
+                    }
+                }
+                $jsonData[$idx++] = $temp;
+            }
+            $cont = 0;
+            $lista = array();
+            foreach($municipios as $municipio) {
+                $muni = array(
+                    'municipio' => $municipio->getNombre(),
+                );
+                $lista[$cont++] = $muni;
+            }
+            $jsonData[$idx++] = $lista;
+
+            return new JsonResponse($jsonData);
+        } else {
+            return $this->render('datos/index.html.twig', [
+                'titulo' => 'Rutas Libres',
+                'image' => 'assets/images/rutas.webp'
             ]);
         }
 
