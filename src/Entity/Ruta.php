@@ -35,9 +35,8 @@ class Ruta
     #[Assert\NotBlank]
     private $tiempo;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', length: 1000)]
     #[Assert\NotBlank]
-    #[Assert\Url]
     private $mapa;
 
     #[ORM\Column(type: 'integer', nullable: true)]

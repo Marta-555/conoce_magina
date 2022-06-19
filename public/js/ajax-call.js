@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
     var url = window.location.pathname;
-    console.log(url);
     if (url === '/alojamiento' || url === '/restaurantes' || url === '/nocturno') {
         $.ajax({
             url:        url,
@@ -12,7 +11,7 @@ $(document).ready(function(){
                     var municipios = data.pop();
                     pintarFiltros(municipios);
                     pintarServicio(data);
-                    activarFiltros();
+                    activarFiltros(url);
                     activarBuscador();
                     // activarPaginador();
             }, error : function(xhr, textStatus, errorThrown) {
@@ -30,7 +29,7 @@ $(document).ready(function(){
                 var municipios = data.pop();
                 pintarFiltros(municipios);
                 pintarActividad(data);
-                activarFiltros();
+                activarFiltros(url);
                 activarBuscador();
                 // activarPaginador();
             }, error : function(xhr, textStatus, errorThrown) {
@@ -45,12 +44,11 @@ $(document).ready(function(){
             dataType:   'json',
             async:      true,
             success: function(data, status) {
-                console.log(data);
                 var municipios = data.pop();
                 pintarFiltros(municipios);
                 pintarRuta(data);
-                // activarFiltros();
-                // activarBuscador();
+                activarFiltros(url);
+                activarBuscador();
                 // activarPaginador();
             }, error : function(xhr, textStatus, errorThrown) {
                 alert('Ajax request failed.');
@@ -64,13 +62,18 @@ $(document).ready(function(){
 
 
 
-function activarFiltros(){
+function activarFiltros(url){
 
     var pulsado = $('#filtros').find('a');
     pulsado.on('click', function(){
 
         var pueblo = $(this).text();
-        var elementos =  $('#contenedor').children();
+
+        if (url === '/rutas') {
+            var elementos =  $('#contenedor').children().children();
+        } else {
+            var elementos =  $('#contenedor').children();
+        }
 
         if(pueblo == 'Todos'){
             elementos.show();
@@ -214,82 +217,59 @@ function pintarActividad(data) {
 
 
 function pintarRuta(data) {
-    //Rellenamos el contenedor
-   $('#contenedor').html('');
+     //Rellenamos el contenedor
+    var contenedor = $('#contenedor').html('');
+    contenedor.append($('<h4 class="font-alt mb-0">Rutas</h4><hr class="divider-w mt-10 mb-20">'));
 
-   for(i = 0; i < data.length; i++) {
-       datos = data[i];
-       //Creamos la estructura
-       var div = $('<div id="item" class="col-sm-4 col-md-4 col-lg-4 '+ datos['muni_nombre'] +'"></div>');
-       var div2 = $('<div class="post"></div>');
+    var estruct = $('<div class="panel-group" id="accordion"></div>');
 
-       //Campo de imagen
-       if(datos['image'] != null){
-           var divImagen = $('<div class="post-thumbnail align-center"><img src="'+ datos['image'] +'" alt="Blog-post Thumbnail"/></div>');
-       } else {
-           var divImagen = $('<div class="post-thumbnail align-center"><img src="images/sinImagen.webp" alt="Blog-post Thumbnail"/></div>');
-       }
-       //Campo nombre
-       var divNombre = $('<div class="post-header font-alt text-center"><h2 class="post-title"><strong>'+ datos['titulo'] +'</strong></h2></div>');
-
-       //Campos de información
-       var divDatos = $('\
-       <div class="post-entry text-center"> \
-            <p class="text-center"><strong>Dificultad: </strong>'+ datos['dificultad'] +'&nbsp;&nbsp;&nbsp;&nbsp;<strong>Longitud: </strong>'+ datos['longitud'] +' Km</p>\
-            <button type="button" class="btn btn-border-d btn-circle" data-toggle="modal" data-target="ventana_'+ datos['id'] +'">Detalles</button>\
-       </div>');
-       //Añadimos los elementos a la estructura
-       var modal = rellenarModal(datos);
-       div2.append(divImagen, divNombre, divDatos, modal);
-       div.append(div2);
-       //Añadimos la estructura al div
-       $('#contenedor').append(div);
-
-
-
-    }
-}
-
-
-function rellenarModal(datos){
-    var divModal = $('\
-    <!-- Modal -->\
-    <div class="modal fade" id="ventana_'+ datos['id'] +'"role="dialog">\
-        <div class="modal-dialog">\
-            <div class="modal-content">\
-                <div class="modal-header">\
-                    <h5 class="modal-title">'+ datos['titulo'] +'</h5>\
-                    <button type="button" class="close" data-dismiss="modal">&times;\
-                    </button>\
+    for(i = 0; i < data.length; i++) {
+        datos = data[i];
+        estruct.append($('\
+            <div class="panel panel-default '+ datos['municipio'] +'" id="item">\
+                <div class="panel-heading">\
+                    <h4 class="panel-title font-alt"><a class="post-title" data-toggle="collapse" data-parent="#accordion" href="#support'+ datos['id'] +'">'+ datos['titulo'] +'</a></h4>\
                 </div>\
-                <div class="modal-body">\
-                    <p>'+ datos['descripcion'] +'</p>\
-                    <p>'+ datos['dificultad'] +'</p>\
-                    <p>'+ datos['longitud'] +'</p>\
-                    <p>'+ datos['tiempo'] +'</p>\
-                    <iframe src="'+ datos['mapa'] +'" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>\
-                    <p>'+ datos['desnivel'] +'</p>\
-                    <img src="'+ datos['image'] +'">\
-                    <p>'+ datos['municipio'] +'</p>\
-                    <p>'+ datos['tipoRuta'] +'</p>\
-                    <p>'+ datos['fecha_publicacion'] +'</p>\
-                    <p>'+ datos['user'] +'</p>\
-                    <p>'+ datos['puntoInteres'] +'</p>\
-                </div>\
-                <div class="modal-footer">\
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>\
+                <div class="panel-collapse collapse" id="support'+ datos['id'] +'">\
+                    <div class="panel-body">\
+                        <p>'+ datos['descripcion'] +'</p>\
+                        <p>'+ datos['dificultad'] +'</p>\
+                        <p>'+ datos['longitud'] +'</p>\
+                        <p>'+ datos['tiempo'] +'</p>\
+                        <div>'+ datos['mapa'] +'</div>>\
+                        <p>'+ datos['desnivel'] +'</p>\
+                        <img src="'+ datos['image'] +'">\
+                        <p>'+ datos['municipio'] +'</p>\
+                        <p>'+ datos['tipoRuta'] +'</p>\
+                        <p>'+ datos['fecha_publicacion'].date +'</p>\
+                        <p>'+ datos['user'] +'</p>\
+                    </div>\
                 </div>\
             </div>\
-        </div>\
-    </div>');
-    return divModal;
+        '));
+
+        // if(datos['puntoInteres'].length = 0){
+        //     $('.panel-body').append($('<button class="btn" data-toggle="collapse" data-parent="#accordion" href="#support'+ datos['id'] +'">Cerrar</button>'));
+
+        // } else {
+        //     $('.panel-body').append($('\
+        //         <div role="tabpanel">\
+        //             <ul class="nav nav-tabs font-alt" role="tablist">\
+        //                 <li class="active"><a href="#support_'+ datos['id'] +'" data-toggle="tab">'+ datos['puntoInteres'] +'</a></li>
+        //                 <li><a href="#sales" data-toggle="tab"><span class="icon-tools-2"></span>sales</a></li>
+        //             </ul>
+        //             <div class="tab-content">
+        //                 <div class="tab-pane active" id="support">The European languages are members of the same family. Their separate existence is a myth.
+        //                 </div>
+        //                 <div class="tab-pane" id="sales">To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words.
+        //                 </div>
+        //             </div>
+
+        //     '));
+        // }
+
+    }
+
+    contenedor.append(estruct);
+
 }
-
-
-
-
-
-
-
-
-

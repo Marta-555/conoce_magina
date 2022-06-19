@@ -34,7 +34,6 @@ class RutaCrudController extends AbstractCrudController
             ]),
             NumberField::new('longitud', 'Longitud'),
             NumberField::new('tiempo', 'Tiempo'),
-            TextField::new('mapa', 'Mapa'),
             IntegerField::new('desnivel', 'Desnivel'),
             ImageField::new('image', 'Imagen')
                 ->setBasePath('images/uploads-ruta')
@@ -44,6 +43,7 @@ class RutaCrudController extends AbstractCrudController
             AssociationField::new('tipoRuta', 'Tipo de ruta'),
             AssociationField::new('user', 'Usuario'),
             DateTimeField::new('fecha_publicacion', 'Fecha de publicación'),
+            TextField::new('mapa', 'Mapa'),
         ];
     }
 

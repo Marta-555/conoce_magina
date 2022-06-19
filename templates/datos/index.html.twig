@@ -14,7 +14,7 @@
 
 {% block body %}
 <section class="module">
-  <div class="container">
+  <div class="container" id="contPrincipal">
     <div class="row">
       <div class="col-sm-12">
         <ul class="filter font-alt" id="filtros">
@@ -51,5 +51,6 @@
 
 {% block javascripts %}
 {{ parent() }}
+
 <script src="{{ asset('js/ajax-call.js') }}"></script>
 {% endblock %}

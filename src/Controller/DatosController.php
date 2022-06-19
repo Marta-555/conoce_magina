@@ -308,6 +308,7 @@ class DatosController extends AbstractController
                 foreach($puntosInt as $punto){
                     if($temp['id'] == $punto->getRuta()->getId()){
                         $pInteres = array();
+                        $pInteres += ['p_id' => $punto->getRuta()->getId()];
                         $pInteres += ['p_titulo' => $punto->getTitulo()];
                         $pInteres += ['p_descrip' => $punto->getDescripcion()];
                         $pInteres += ['p_coord' => $punto->getCoordenadas()];
