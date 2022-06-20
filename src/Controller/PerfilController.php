@@ -40,7 +40,7 @@ class PerfilController extends AbstractController
     }
 
     #[Route('/perfil', name: 'app_perfil')]
-    public function perfil(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function perfil(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager, SluggerInterface $slugger,  UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $userActive = $this->getUser()->getActive();
@@ -70,7 +70,7 @@ class PerfilController extends AbstractController
 
                 $usuario->setName($nombre);
                 $usuario->setSurname($apellidos);
-                $usuario->setPassword($password);
+                $usuario->setPassword($userPasswordHasher->hashPassword($usuario, $password));
 
                 if($image) {
                     $originalImage = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);

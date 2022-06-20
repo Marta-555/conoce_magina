@@ -50,9 +50,17 @@
                   <h4 class="font-alt"><strong>Actividad reciente</strong></h4>
                   <hr class="divider-d" style="margin-bottom: 2%;">
                   <h6 class="font-alt"><strong>Rutas</strong></h6>
-                  <p>{{ ruta[0].titulo }} ... {{ ruta[0].municipio }}</p>
+                  {% if ruta is empty %}
+                    <p>Sin actividad reciente</p>
+                  {% else %}
+                    <p>{{ ruta[0].titulo }} ... {{ ruta[0].municipio }}</p>
+                  {% endif %}
                   <h6 class="font-alt"><strong>Puntos de interés</strong></h6>
-                  <p>{{ punto[0].titulo }} ...</p>
+                  {% if punto is empty %}
+                    <p>Sin actividad reciente</p>
+                  {% else %}
+                    <p>{{ punto[0].titulo }} ...</p>
+                  {% endif %}
                 </div>
               </div>
             </div>
