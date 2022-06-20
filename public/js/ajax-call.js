@@ -217,59 +217,96 @@ function pintarActividad(data) {
 
 
 function pintarRuta(data) {
+
      //Rellenamos el contenedor
     var contenedor = $('#contenedor').html('');
     contenedor.append($('<h4 class="font-alt mb-0">Rutas</h4><hr class="divider-w mt-10 mb-20">'));
 
-    var estruct = $('<div class="panel-group" id="accordion"></div>');
+    contenedor.append($('<div class="panel-group" id="accordion"></div>'));
 
     for(i = 0; i < data.length; i++) {
         datos = data[i];
-        estruct.append($('\
+
+        var puntoId = "punto"+ datos['id'];
+        var coordenads = 'coord'+ datos['id'];
+
+        var estructura = ($('\
             <div class="panel panel-default '+ datos['municipio'] +'" id="item">\
-                <div class="panel-heading">\
-                    <h4 class="panel-title font-alt"><a class="post-title" data-toggle="collapse" data-parent="#accordion" href="#support'+ datos['id'] +'">'+ datos['titulo'] +'</a></h4>\
-                </div>\
-                <div class="panel-collapse collapse" id="support'+ datos['id'] +'">\
-                    <div class="panel-body">\
-                        <p>'+ datos['descripcion'] +'</p>\
-                        <p>'+ datos['dificultad'] +'</p>\
-                        <p>'+ datos['longitud'] +'</p>\
-                        <p>'+ datos['tiempo'] +'</p>\
-                        <div>'+ datos['mapa'] +'</div>>\
-                        <p>'+ datos['desnivel'] +'</p>\
-                        <img src="'+ datos['image'] +'">\
-                        <p>'+ datos['municipio'] +'</p>\
-                        <p>'+ datos['tipoRuta'] +'</p>\
-                        <p>'+ datos['fecha_publicacion'].date +'</p>\
-                        <p>'+ datos['user'] +'</p>\
+                <div class="panel panel-default '+ datos['municipio'] +'" id="item">\
+                    <div class="panel-heading">\
+                        <h4 class="panel-title font-alt"><a data-toggle="collapse" data-parent="#accordion" href="#support'+ datos['id'] +'">'+ datos['titulo'] +'</a></h4>\
+                    </div>\
+                    <div class="panel-collapse collapse" id="support'+ datos['id'] +'">\
+                        <div class="panel-body">\
+                            <div class="row">\
+                                <h2 class="font-alt text-center">'+ datos['titulo'] +'</h2>\
+                            </div>\
+                            <div class="row landing-image-text">\
+                                <div class="col-md-6">\
+                                    <img class="center-block" src="'+ datos['image'] +'" alt="imagen ruta"><br>\
+                                    <p class="mapa">'+ datos['mapa'] +'</p>\
+                                </div>\
+                                <div class="col-md-6">\
+                                    <p class="text-justify"><strong>Dificultad: </strong>'+ datos['dificultad'] +'&nbsp; &nbsp; &nbsp; &nbsp; <strong>Longitud: </strong>'+ datos['longitud'] +' Km <br>\
+                                    <strong>Tiempo: </strong>'+ datos['tiempo'] +' horas &nbsp; &nbsp; &nbsp; &nbsp; <strong>Desnivel: </strong>'+ datos['desnivel'] +' <br>\
+                                    <strong>Tipo de ruta: </strong>'+ datos['tipoRuta'] +'<br> <strong>Municipio: </strong>'+ datos['municipio'] +' </p>\
+                                    <p class="text-justify">'+ datos['descripcion'] +'</p>\
+                                    <p class="text-right">Publicado por: <strong>'+ datos['user'] +'</strong></p>\
+                                </div>\
+                            </div>\
+                            <div id="'+ puntoId + '" class="row landing-image-text"></div>\
+                        </div>\
                     </div>\
                 </div>\
             </div>\
         '));
 
-        // if(datos['puntoInteres'].length = 0){
-        //     $('.panel-body').append($('<button class="btn" data-toggle="collapse" data-parent="#accordion" href="#support'+ datos['id'] +'">Cerrar</button>'));
+        $('#accordion').append(estructura);
 
-        // } else {
-        //     $('.panel-body').append($('\
-        //         <div role="tabpanel">\
-        //             <ul class="nav nav-tabs font-alt" role="tablist">\
-        //                 <li class="active"><a href="#support_'+ datos['id'] +'" data-toggle="tab">'+ datos['puntoInteres'] +'</a></li>
-        //                 <li><a href="#sales" data-toggle="tab"><span class="icon-tools-2"></span>sales</a></li>
-        //             </ul>
-        //             <div class="tab-content">
-        //                 <div class="tab-pane active" id="support">The European languages are members of the same family. Their separate existence is a myth.
-        //                 </div>
-        //                 <div class="tab-pane" id="sales">To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words.
-        //                 </div>
-        //             </div>
+        if(datos['puntoInteres'] != ''){
 
-        //     '));
-        // }
+            if(datos['puntoInteres']['p_foto'] != null) {
+                var conImagen = $('\
+                    <hr class="divider-w pt-20">\
+                    <div class="col-md-6 col-md-push-6">\
+                        <img class="center-block" src="'+ datos['puntoInteres']['p_foto'] +'" alt="imagen puntoInteres">\
+                    </div>\
+                    <div class="col-md-6 col-md-push-6" id="puntoEstruc">\
+                        <h4 class="font-alt text-center">Puntos de interés</h4>\
+                        <ul>\
+                            <li>\
+                            <p class="font-alt"><strong>'+ datos['puntoInteres']['p_titulo'] +'</strong></p>\
+                            <p id="'+ coordenads +'"></p>\
+                            <p class="text-justify">'+ datos['puntoInteres']['p_descrip'] +'</p>\
+                            <p class="text-justify">Publicado por: <strong>'+ datos['puntoInteres']['p_user'] +'</strong></p>\
+                            </li>\
+                        </ul>\
+                    </div>');
+                $('#'+puntoId).append(conImagen);
+            } else {
+                var sinImagen = $('\
+                    <hr class="divider-w pt-20">\
+                    <div class="col-md-12">\
+                        <h4 class="font-alt text-center">Puntos de interés</h4>\
+                        <ul>\
+                            <li>\
+                            <p class="font-alt"><strong>'+ datos['puntoInteres']['p_titulo'] +'</strong></p>\
+                            <p id="'+ coordenads +'"></p>\
+                            <p class="text-justify">'+ datos['puntoInteres']['p_descrip'] +'</p>\
+                            <p class="text-justify">Publicado por: <strong>'+ datos['puntoInteres']['p_user'] +'</strong></p>\
+                            </li>\
+                        </ul>\
+                    </div>');
+                $('#'+puntoId).append(sinImagen);
+            }
+
+            if(datos['puntoInteres']['p_coord'] != null){
+                $(coordenads).append(datos['puntoInteres']['p_coord']);
+            }
+
+        }
 
     }
 
-    contenedor.append(estruct);
 
 }

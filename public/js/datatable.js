@@ -52,7 +52,7 @@ $(document).ready(function () {
 
 function informacion(data) {
     return (
-        '<div class="col-sm-12 panel"  id="modalInfo_'+ data.id +'">\
+        '<div class="col-sm-12 panelTabla"  id="modalInfo_'+ data.id +'">\
             <div class="informacion">\
                 <i class="far fa-times-circle" id="cerrar"></i>\
                 <div class="row landing-image-text">\

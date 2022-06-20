@@ -562,7 +562,7 @@ div#ventanaModal {
 
 
   /* Datatable */
-  div.panel {
+  div.panelTabla {
 	background: #fff;
 	position: fixed;
 	top: 15%;
@@ -579,7 +579,7 @@ div#ventanaModal {
 	border: 1px solid black;
   }
 
-  div.panel.ver {
+  div.panelTabla.ver {
 	visibility: visible;
   }
 
@@ -590,4 +590,10 @@ div#ventanaModal {
 	font-size: 25px;
 	color: #955A47;
 	cursor: pointer;
+  }
+
+
+  /* Mapas */
+  p.mapa iframe{
+	width: 100%;
   }
