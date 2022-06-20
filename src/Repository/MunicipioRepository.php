@@ -57,17 +57,6 @@ class MunicipioRepository extends ServiceEntityRepository
         ;
     }
 
-    // public function findId($nombre)
-    // {
-    //     return $this->createQueryBuilder('m')
-    //     ->select('m.id')
-    //     ->where('m.nombre = :val')
-    //     ->setParameter('val', $nombre)
-    //     ->getQuery()
-    //     ->getOneOrNullResult()
-    //     ;
-    // }
-
 
     // /**
     //  * @return Municipio[] Returns an array of Municipio objects

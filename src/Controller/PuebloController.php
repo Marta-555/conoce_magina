@@ -2,21 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\ActividadOcio;
 use App\Repository\ActividadOcioRepository;
 use App\Repository\AlojamientoRepository;
 use App\Repository\EmpresaTurismoRepository;
-use Exception;
 use App\Repository\MunicipioRepository;
 use App\Repository\PubRepository;
 use App\Repository\RestauranteRepository;
 use App\Repository\VisitaGuiadaRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PuebloController extends AbstractController

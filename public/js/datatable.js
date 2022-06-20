@@ -17,10 +17,6 @@ $(document).ready(function () {
                 body    += "<td><img src='" + data.image + "'</td>";
                 body    += "<td>" + data.municipio + "</td>";
                 body    += "<td>" + data.tipoRuta + "</td>";
-
-                // if(data.puntoInteres != null){
-                //     body    += "<td>" + data.puntoInteres + "</td>";
-                // }
                 body    += "<td><button class='btn' id='editar'><i class='fas fa-pencil-alt'></i></button><button class='btn' id='borrar'><i class='fas fa-trash-alt'></i></button></td>";
                 body    += "</tr>";
                 $('#tableUsuario tbody').append(body);
@@ -72,18 +68,3 @@ function informacion(data) {
         </div>'
     );
 }
-
-
-
- // <p>Título:  ' + data.titulo + '<br>\
-                // Descripción:  ' + data.descripcion + '<br>\
-                // Dificultad:  ' + data.dificultad + '<br>\
-                // Longitud:  ' + data.longitud + '<br>\
-                // Tiempo:  ' + data.tiempo + '<br>\
-                // Mapa:  ' + data.mapa + '<br>\
-                // // Desnivel:  ' + data.desnivel + '<br>\
-                // {/* Image:  ' + data.image + '<br>\ */}
-                // Municipio:  ' + data.municipio + '<br>\
-                // TipoRuta:  ' + data.tipoRuta + '<br>\
-                // Publicacion:  ' + data.fecha_publicacion.date + '<br>\
-                // </p>\

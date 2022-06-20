@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     var url = window.location.pathname;
-    if (url === '/alojamiento' || url === '/restaurantes' || url === '/nocturno') {
+    if (url === '/alojamiento' || url === '/restaurantes' || url === '/ocio-nocturno') {
         $.ajax({
             url:        url,
             type:       'POST',
