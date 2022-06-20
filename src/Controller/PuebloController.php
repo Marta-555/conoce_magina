@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ActividadOcio;
 use App\Repository\ActividadOcioRepository;
 use App\Repository\AlojamientoRepository;
+use App\Repository\EmpresaTurismoRepository;
 use Exception;
 use App\Repository\MunicipioRepository;
 use App\Repository\PubRepository;
@@ -27,7 +28,7 @@ class PuebloController extends AbstractController
     private $visitagRepository;
     private $pubRepository;
 
-    public function __construct(MunicipioRepository $municipioRepository, AlojamientoRepository $alojamientoRepository, RestauranteRepository $restauranteRepository, ActividadOcioRepository $ocioRepository, VisitaGuiadaRepository $visitagRepository, PubRepository $pubRepository)
+    public function __construct(MunicipioRepository $municipioRepository, AlojamientoRepository $alojamientoRepository, RestauranteRepository $restauranteRepository, ActividadOcioRepository $ocioRepository, VisitaGuiadaRepository $visitagRepository, PubRepository $pubRepository, EmpresaTurismoRepository $empresasRepository)
     {
         $this->municipioRepository = $municipioRepository;
         $this->alojamientoRepository = $alojamientoRepository;
@@ -35,6 +36,7 @@ class PuebloController extends AbstractController
         $this->ocioRepository = $ocioRepository;
         $this->visitagRepository = $visitagRepository;
         $this->pubRepository = $pubRepository;
+        $this->empresasRepository = $empresasRepository;
     }
 
     public function informacion(string $nombre)
@@ -49,8 +51,9 @@ class PuebloController extends AbstractController
         $pub = $this->pubRepository->findPub($id);
         $actOcio =$this->ocioRepository->findActOcio($id);
         $visitaG = $this->visitagRepository->findVisitaG($id);
+        $empresas = $this->empresasRepository->findAll();
 
-        $datos = [$municipio, $alojamiento, $restaurante, $pub, $actOcio, $visitaG];
+        $datos = [$municipio, $alojamiento, $restaurante, $pub, $actOcio, $visitaG, $empresas];
         return $datos;
     }
 
@@ -68,6 +71,7 @@ class PuebloController extends AbstractController
             'pub' => $datos[3],
             'ocio' => $datos[4],
             'visitaG' => $datos[5],
+            'empresas' =>$datos[6],
             'galeria' => [
                 'titulo1' => 'Castillo de Albanchez de mágina',
                 'imagen1' => 'assets/images/pueblos/albanchez/castillo2.webp',

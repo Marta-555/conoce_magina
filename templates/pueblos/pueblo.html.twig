@@ -127,7 +127,7 @@
           </div>
         </div>
       </div>
-      {# <div class="row">
+      <div class="row">
         <div class="work-item tActivo">
           <h3 class="alt-features-title font-alt">Turismo Activo</h3>
           <div>
@@ -135,15 +135,22 @@
               {% for oc in ocio %}
                 <p>
                   <strong><span>{{oc.nombre}}</span></strong><br>
-                  Dirección: <span>{{oc.direccion}}</span><br>
-                  Tfno: <a href="tel:+34{{oc.telefono1}}">{{oc.telefono1}}</a>
-                    {% if oc.telefono2 is not null %}
-                      <a href="tel:+34{{oc.telefono2}}">/ {{oc.telefono2}}</a>
-                    {% endif %}
-                  <br>
-                  {% if oc.paginaWeb is not null %}
-                    Web: <a href="{{oc.paginaWeb}}" target="_blank">{{oc.paginaWeb}}</a>
-                  {% endif %}
+                  Descripción: <span>{{oc.descripcion}}</span><br>
+                  Precio: <span>{{oc.precio}} €</span><br>
+
+                  {% for e in empresas %}
+                      {% if e.id == oc.empresa.id %}
+                        Empresa: <span>{{e.nombre}}</span><br>
+                        Tfno: <a href="tel:+34{{ e.telefono1 }}">{{ e.telefono1 }}</a>
+                        {% if e.telefono2 is not null %}
+                            <a href="tel:+34{{ e.telefono2 }}">/ {{ e.telefono2 }}</a>
+                        {% endif %}
+                        <br>
+                        {% if e.paginaWeb is not null %}
+                            Web: <a href="{{ e.paginaWeb }}" target="_blank">{{ e.paginaWeb }}</a>
+                        {% endif %}
+                      {% endif %}
+                  {% endfor %}
                 </p>
               {% endfor %}
             {% else %}
@@ -151,8 +158,8 @@
             {% endif %}
           </div>
         </div>
-      </div> #}
-      {# <div class="row">
+      </div>
+      <div class="row">
         <div class="work-item vGuiadas">
           <h3 class="alt-features-title font-alt">Visitas Guiadas</h3>
           <div>
@@ -160,15 +167,22 @@
               {% for visit in visitaG %}
                 <p>
                   <strong><span>{{visit.nombre}}</span></strong><br>
-                  Dirección: <span>{{visit.direccion}}</span><br>
-                  Tfno: <a href="tel:+34{{visit.telefono1}}">{{visit.telefono1}}</a>
-                    {% if visit.telefono2 is not null %}
-                      <a href="tel:+34{{visit.telefono2}}">/ {{visit.telefono2}}</a>
-                    {% endif %}
-                  <br>
-                  {% if visit.paginaWeb is not null %}
-                    Web: <a href="{{visit.paginaWeb}}" target="_blank">{{visit.paginaWeb}}</a>
-                  {% endif %}
+                  Descripción: <span>{{visit.descripcion}}</span><br>
+                  Precio: <span>{{visit.precio}} €</span><br>
+
+                  {% for e in empresas %}
+                      {% if e.id == visit.empresa.id %}
+                        Empresa: <span>{{e.nombre}}</span><br>
+                        Tfno: <a href="tel:+34{{ e.telefono1 }}">{{ e.telefono1 }}</a>
+                        {% if e.telefono2 is not null %}
+                            <a href="tel:+34{{ e.telefono2 }}">/ {{ e.telefono2 }}</a>
+                        {% endif %}
+                        <br>
+                        {% if e.paginaWeb is not null %}
+                            Web: <a href="{{ e.paginaWeb }}" target="_blank">{{ e.paginaWeb }}</a>
+                        {% endif %}
+                      {% endif %}
+                  {% endfor %}
                 </p>
               {% endfor %}
             {% else %}
@@ -176,7 +190,7 @@
             {% endif %}
           </div>
         </div>
-      </div> #}
+      </div>
     </div>
   </div>
 </section>
