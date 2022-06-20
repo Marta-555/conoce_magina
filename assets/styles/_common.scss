@@ -511,3 +511,52 @@ a,
 .alert i {
 	margin-right: 5px;
 }
+
+/* Modal */
+div#ventanaModal {
+	background: rgba(48, 48, 48, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	visibility: hidden;
+  }
+
+  div#panel {
+	background: #fff;
+	display: block;
+	align-items: center;
+	width: 45%;
+	border-radius: 2%;
+	transform: scale(0.6);
+	opacity: 0;
+	transition: .3s ease all;
+  }
+
+  div.modificar {
+	padding: 2%;
+	margin: 5%;
+  }
+
+  #close {
+	position: absolute;
+	top: 25px;
+	right: 20px;
+	font-size: 25px;
+	color: #955A47;
+	cursor: pointer;
+  }
+
+  div#ventanaModal.ver {
+	visibility: visible;
+  }
+
+  div#panel.ver {
+	transform: scale(1);
+	opacity: 1;
+  }
+

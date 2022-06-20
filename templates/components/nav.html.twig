@@ -36,7 +36,7 @@
               {% if app.user.image is null %}
                   <img id="navbar-user" src="images/usuario.webp" alt="user">
               {% else %}
-                  <img id="navbar-user" src="{{ app.user.image }}" alt="user">
+                  <img id="navbar-user" src="images/uploads-user/{{ app.user.image }}" alt="user">
               {% endif %}
             </a>
 
@@ -45,7 +45,7 @@
               {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('admin') }}">Panel de Gestión</a></li>
               {% else %}
-                <li><a href="">Perfil</a></li>
+                <li><a href="{{ path('app_perfil') }}">Perfil</a></li>
                 <li><a href="{{ path('app_listado') }}">Rutas publicadas</a></li>
                 <li><a href="{{ path('app_newRuta') }}">Nueva ruta</a></li>
               {% endif %}

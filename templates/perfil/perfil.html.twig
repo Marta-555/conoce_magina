@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+<section class="module bg-dark-30 about-page-header" data-background="assets/images/perfil/portada.webp">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <h2 class="module-title mb-0">{{ nombre }}</h2>
+          </div>
+      </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block body %}
+<section class="module">
+    <div class="container">
+
+        {% if errorEmail is defined %}
+            {% for flash in app.flashes('error') %}
+                <div class="alert alert-danger">{{ flash }}</div>
+            {% endfor %}
+        {% else %}
+            {% for flash in app.flashes('success') %}
+                <div class="alert alert-success">{{ flash }}</div>
+            {% endfor %}
+
+            <div class="row landing-image-text">
+              <div class="col-md-6" style="border: 1px solid black; border-radius: 20px; padding: 2%">
+                <p class="align-center"><input type="button" class="btn btn-border-d btn-circle" value="Modificar información personal" id="btnModificar"></p>
+
+                {% if image is null %}
+                  <img class="center-block" src="images/usuario.webp" alt="user"><br>
+                {% else %}
+                  <img class="center-block" src="{{ image }}" alt="user" style="width: 65%;"><br>
+                {% endif %}
+              </div>
+              <div class="col-md-6" style="padding: 0 5%;">
+                <div class="row">
+                  <br>
+                  <h4 class="font-alt"><strong>Datos personales</strong></h4>
+                  <hr class="divider-d" style="margin-bottom: 2%;">
+                  <p><strong>Nombre: </strong> {{ usuario.name }} </p>
+                  <p><strong>Apellidos: </strong> {{ usuario.surname }}</p>
+                  <p><strong>Email: </strong> {{ usuario.email }}</p>
+                  <p><strong>Contraseña: </strong> ************</p>
+                </div><br>
+
+                <div class="row">
+                  <h4 class="font-alt"><strong>Actividad reciente</strong></h4>
+                  <hr class="divider-d" style="margin-bottom: 2%;">
+                  <h6 class="font-alt"><strong>Rutas</strong></h6>
+                  <p>{{ ruta[0].titulo }} ... {{ ruta[0].municipio }}</p>
+                  <h6 class="font-alt"><strong>Puntos de interés</strong></h6>
+                  <p>{{ punto[0].titulo }} ...</p>
+                </div>
+              </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+<div class="container" >
+  <div class="row" id="ventanaModal">
+    <div class="col-sm-6 col-sm-offset-3"  id="panel">
+          <div class="modificar">
+            <i class="far fa-times-circle" id="close"></i>
+            <h4 class="font-alt text-center">Datos personales</h4>
+
+            {{ form_start(form, {'attr': {'role':'form'}}) }}
+              <div class="form-group">
+                  {{ form_widget(form.name, {'attr': {'class':'form-control', 'placeholder':'Nombre'} }) }}
+                  <span class="text-danger">{{ form_errors(form.name) }}</span>
+              </div>
+              <div class="form-group">
+                  {{ form_widget(form.surname, {'attr': {'class':'form-control', 'placeholder':'Apellidos'} }) }}
+                  <span class="text-danger">{{ form_errors(form.surname) }}</span>
+              </div>
+              <div class="form-group">
+                  <input class="form-control" type="text" id="name" name="name" placeholder= "{{ usuario.email }}" readonly/>
+              </div>
+              <div class="form-group">
+                  {{ form_widget(form.password, {'attr': {'class':'form-control', 'placeholder':'Contraseña'} }) }}
+                  <span class="text-danger">{{ form_errors(form.password) }}</span>
+              </div>
+              <div class="form-group">
+                  {{ form_widget(form.image, {'attr': {'class':'form-control input-lg'} }) }}
+                  <span class="text-danger">{{ form_errors(form.image) }}</span>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-block btn-round btn-b">Guardar</button>
+              </div>
+            {{ form_end(form) }}
+          </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script>
+  $('#btnModificar').on('click', function(){
+    $('#ventanaModal').addClass('ver');
+    $('#panel').addClass('ver');
+  });
+
+  $('#close').on('click', function(){
+    $('#ventanaModal').removeClass('ver');
+    $('#panel').removeClass('ver');
+  })
+</script>
+
+{% endblock %}

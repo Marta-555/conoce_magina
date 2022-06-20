@@ -6,6 +6,7 @@
 parameters:
     rutas_directory: '%kernel.project_dir%/public/images/uploads-ruta'
     puntoInt_directory: '%kernel.project_dir%/public/images/uploads-pInteres'
+    user_directory: '%kernel.project_dir%/public/images/uploads-user'
 
 services:
     # default configuration for services in *this* file

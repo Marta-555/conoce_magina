@@ -2,11 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\PuntoInteres;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<PuntoInteres>
@@ -45,6 +46,20 @@ class PuntoInteresRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findUserOrder(User $user)
+    {
+        $id_user = $user->getId();
+
+        return $this->createQueryBuilder('p')
+        ->where('p.user = :val')
+        ->setParameter('val', $id_user)
+        ->orderBy('p.fecha_publicacion', 'DESC')
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getResult()
+        ;
     }
 
     // /**

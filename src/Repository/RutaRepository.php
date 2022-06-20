@@ -60,6 +60,20 @@ class RutaRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findUserOrder(User $user)
+    {
+        $id_user = $user->getId();
+
+        return $this->createQueryBuilder('r')
+        ->where('r.user = :val')
+        ->setParameter('val', $id_user)
+        ->orderBy('r.fecha_publicacion', 'DESC')
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Ruta[] Returns an array of Ruta objects
     //  */

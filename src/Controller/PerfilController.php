@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\Ruta;
+use App\Entity\User;
 use App\Form\RutaType;
+use App\Entity\TipoRuta;
 use App\Entity\Municipio;
 use App\Entity\PuntoInteres;
-use App\Entity\TipoRuta;
+use App\Form\UserProfileType;
 use App\Form\PuntoInteresFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +25,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[IsGranted('ROLE_USER')]
 class PerfilController extends AbstractController
@@ -31,6 +37,72 @@ class PerfilController extends AbstractController
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
+    }
+
+    #[Route('/perfil', name: 'app_perfil')]
+    public function perfil(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $userActive = $this->getUser()->getActive();
+
+        if ($userActive != true){
+            $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
+
+            return $this->render('perfil/listado.html.twig', [
+                'errorEmail' => 'error'
+            ]);
+
+        } else {
+            $usuario = $this->getUser();
+            $ruta = $doctrine->getRepository(Ruta::class)->findUserOrder($usuario);
+            $punto = $doctrine->getRepository(PuntoInteres::class)->findUserOrder($usuario);
+            $img = $usuario->getImageUrl();
+
+            $form = $this->createForm(UserProfileType::class, $usuario);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $nombre = $form->get('name')->getData();
+                $apellidos = $form->get('surname')->getData();
+                $password = $form->get('password')->getData();
+                $image = $form->get('image')->getData();
+
+
+                $usuario->setName($nombre);
+                $usuario->setSurname($apellidos);
+                $usuario->setPassword($password);
+
+                if($image) {
+                    $originalImage = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeImage = $slugger->slug($originalImage);
+                    $newImage = $safeImage.'-'.uniqid().'.'.$image->guessExtension();
+
+                    try {
+                        $image->move(
+                            $this->getParameter('user_directory'),
+                            $newImage
+                        );
+
+                    } catch (FileException $e) {
+                        return $e->getMessage();
+                    }
+                    $usuario->setImage($newImage);
+                }
+
+                $entityManager->persist($usuario);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_perfil');
+            }
+
+            return $this->render('perfil/perfil.html.twig', [
+                'nombre' => 'Perfil de usuario',
+                'usuario' => $usuario,
+                'image' => $img,
+                'ruta' => $ruta,
+                'punto' => $punto,
+                'form' => $form->createView(),
+            ]);
+        }
     }
 
 
