@@ -2,16 +2,39 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Solicitudes;
+use App\Form\ContactoFormType;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main')]
-    public function index(): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('main/index.html.twig');
+        $solicitud = new Solicitudes();
+        $form = $this->createForm(ContactoFormType::class, $solicitud);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $solicitud->setGestionado('0');
+            $entityManager->persist($solicitud);
+            $entityManager->flush();
+
+            $this->addFlash('enviado', '¡Gracias por contactar con nosotros!');
+            return $this->redirectToRoute('app_main');
+        }
+
+        return $this->render('main/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 
