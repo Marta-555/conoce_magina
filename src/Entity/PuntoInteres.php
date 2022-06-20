@@ -18,7 +18,7 @@ class PuntoInteres
     #[Assert\NotBlank]
     private $titulo;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 10000)]
     #[Assert\NotBlank]
     private $descripcion;
 

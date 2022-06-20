@@ -42,7 +42,7 @@ class Ruta
     #[ORM\Column(type: 'integer', nullable: true)]
     private $desnivel;
 
-    #[ORM\Column(type: 'string', length: 1000)]
+    #[ORM\Column(type: 'string', length: 10000)]
     #[Assert\NotBlank]
     private $descripcion;
 
