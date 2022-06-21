@@ -33,17 +33,17 @@ class PerfilController extends AbstractController
     #[Route('/perfil', name: 'app_perfil')]
     public function perfil(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager, SluggerInterface $slugger,  UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        $userActive = $this->getUser()->getActive();
+        // $this->denyAccessUnlessGranted('ROLE_USER');
+        // $userActive = $this->getUser()->getActive();
 
-        if ($userActive != true){
-            $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
+        // if ($userActive != true){
+        //     $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
 
-            return $this->render('perfil/listado.html.twig', [
-                'errorEmail' => 'error'
-            ]);
+        //     return $this->render('perfil/listado.html.twig', [
+        //         'errorEmail' => 'error'
+        //     ]);
 
-        } else {
+        // } else {
             $usuario = $this->getUser();
             $ruta = $doctrine->getRepository(Ruta::class)->findUserOrder($usuario);
             $punto = $doctrine->getRepository(PuntoInteres::class)->findUserOrder($usuario);
@@ -93,24 +93,24 @@ class PerfilController extends AbstractController
                 'punto' => $punto,
                 'form' => $form->createView(),
             ]);
-        }
+        // }
     }
 
 
     #[Route('/perfil-nuevaRuta', name: 'app_newRuta')]
     public function nuevaRuta(Request $request, SluggerInterface $slugger): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        $userActive = $this->getUser()->getActive();
+        // $this->denyAccessUnlessGranted('ROLE_USER');
+        // $userActive = $this->getUser()->getActive();
 
-        if ($userActive != true){
-            $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
+        // if ($userActive != true){
+        //     $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
 
-            return $this->render('perfil/newRuta.html.twig', [
-                'errorEmail' => 'error'
-            ]);
+        //     return $this->render('perfil/newRuta.html.twig', [
+        //         'errorEmail' => 'error'
+        //     ]);
 
-        } else {
+        // } else {
 
             $usuario = $this->getUser();
 
@@ -182,24 +182,24 @@ class PerfilController extends AbstractController
                 'form2' => $form2->createView(),
                 'nombre' => 'Ayúdanos a conocer nuevas rutas y puntos de interés'
             ]);
-        }
+        // }
 
     }
 
     #[Route('/perfil-listado', name: 'app_listado')]
     public function listado(Request $request, ManagerRegistry $doctrine): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        $userActive = $this->getUser()->getActive();
+        // $this->denyAccessUnlessGranted('ROLE_USER');
+        // $userActive = $this->getUser()->getActive();
 
-        if ($userActive != true){
-            $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
+        // if ($userActive != true){
+        //     $this->addFlash('error', 'Verifica tu correo electrónico para poder acceder');
 
-            return $this->render('perfil/listado.html.twig', [
-                'errorEmail' => 'error'
-            ]);
+        //     return $this->render('perfil/listado.html.twig', [
+        //         'errorEmail' => 'error'
+        //     ]);
 
-        } else {
+        // } else {
 
             $usuario = $this->getUser();
             $rutas = $doctrine->getRepository(Ruta::class)->findUser($usuario);
@@ -243,6 +243,6 @@ class PerfilController extends AbstractController
                 ]);
             }
 
-        }
+        // }
     }
 }

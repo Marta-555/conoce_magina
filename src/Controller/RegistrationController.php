@@ -52,28 +52,29 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $signatureComponents = $this->verifyEmailHelper->generateSignature(
-                'registration_confirmation_route',
-                $user->getId(),
-                $user->getEmail(),
-                ['id' => $user->getId()]
-            );
+            // $signatureComponents = $this->verifyEmailHelper->generateSignature(
+            //     'registration_confirmation_route',
+            //     $user->getId(),
+            //     $user->getEmail(),
+            //     ['id' => $user->getId()]
+            // );
 
-            $email = (new Email())
-                ->from('mrtgarciaortega@gmail.com')
-                ->to(new Address($form->get('email')->getData()))
-                ->subject('Email de verificación - Conoce Mágina')
-                ->html(
-                    '<p>¡Bienvenido a nuestra web!</p>
-                    <p>Verifica tu email para acceder a tu cuenta haciendo click en el siguiente enlace</p>
-                    <a href=' . $signatureComponents->getSignedUrl().'>Verificar</a>'
-                );
+            // $email = (new Email())
+            //     ->from('mrtgarciaortega@gmail.com')
+            //     ->to(new Address($form->get('email')->getData()))
+            //     ->subject('Email de verificación - Conoce Mágina')
+            //     ->html(
+            //         '<p>¡Bienvenido a nuestra web!</p>
+            //         <p>Verifica tu email para acceder a tu cuenta haciendo click en el siguiente enlace</p>
+            //         <a href=' . $signatureComponents->getSignedUrl().'>Verificar</a>'
+            //     );
 
-            $transport = Transport::fromDsn($_ENV['MAILER_DSN']);
-            $mailer = new Mailer($transport);
-            $mailer->send($email);
+            // $transport = Transport::fromDsn($_ENV['MAILER_DSN']);
+            // $mailer = new Mailer($transport);
+            // $mailer->send($email);
 
-            $this->addFlash('success', 'Usuario registrado correctamente. Verifica tu email para acceder a tu cuenta.');
+            $this->addFlash('success', 'Usuario registrado correctamente.');
+            return $this->redirectToRoute('app_login');
 
         }
 
@@ -82,35 +83,35 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verify', name: 'registration_confirmation_route')]
-    public function verifyUserEmail(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    // #[Route('/verify', name: 'registration_confirmation_route')]
+    // public function verifyUserEmail(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    // {
+    //     $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $user = $userRepository->find($request->query->get('id'));
+    //     $user = $userRepository->find($request->query->get('id'));
 
-        if (!$user) {
-            return $this->redirectToRoute('app_register');
-        }
+    //     if (!$user) {
+    //         return $this->redirectToRoute('app_register');
+    //     }
 
-        try {
-            $this->verifyEmailHelper->validateEmailConfirmation(
-                $request->getUri(),
-                $user->getId(),
-                $user->getEmail()
-            );
+    //     try {
+    //         $this->verifyEmailHelper->validateEmailConfirmation(
+    //             $request->getUri(),
+    //             $user->getId(),
+    //             $user->getEmail()
+    //         );
 
-        } catch (VerifyEmailExceptionInterface $e) {
-            $this->addFlash('error', $e->getReason());
+    //     } catch (VerifyEmailExceptionInterface $e) {
+    //         $this->addFlash('error', $e->getReason());
 
-            return $this->redirectToRoute('app_register');
-        }
+    //         return $this->redirectToRoute('app_register');
+    //     }
 
-        $user->setActive('1');
-        $entityManager->flush();
+    //     $user->setActive('1');
+    //     $entityManager->flush();
 
-        $this->addFlash('success', 'Tu email ha sido verificado con éxito');
+    //     $this->addFlash('success', 'Tu email ha sido verificado con éxito');
 
-        return $this->redirectToRoute('app_listado');
-    }
+    //     return $this->redirectToRoute('app_listado');
+    // }
 }
