@@ -1,5 +1,5 @@
-LANDINGPAGE
-===========
+CONOCE MAGINA
+==============
 
 Pasos a seguir para la instalación del proyecto en nuestro repositorio local:
 ------------------------------------------------------------------------------
